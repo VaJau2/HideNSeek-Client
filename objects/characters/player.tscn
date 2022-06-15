@@ -1,0 +1,66 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://objects/characters/character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/characters/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/audio/steps/wood/walk1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/audio/steps/dirt/run1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/steps/dirt/run2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/steps/ice/run2.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/audio/steps/dirt/run3.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/steps/wood/walk3.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/steps/snow/walk2.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/audio/steps/ice/run1.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/audio/steps/snow/run2.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/audio/steps/snow/walk1.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/audio/steps/dirt/walk3.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/audio/steps/ice/run3.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/audio/steps/snow/walk3.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/audio/steps/ice/walk1.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/audio/steps/ice/walk2.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/audio/steps/dirt/walk2.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/audio/steps/wood/walk2.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/audio/steps/dirt/walk1.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/audio/steps/ice/walk3.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/audio/steps/snow/run1.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/audio/steps/snow/run3.wav" type="AudioStream" id=23]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 35 )
+
+[node name="player" instance=ExtResource( 1 )]
+collision_layer = 2147483649
+collision_mask = 1
+script = ExtResource( 2 )
+
+[node name="audi" parent="." index="3"]
+stepsArray = {
+"dirt": [ ExtResource( 20 ), ExtResource( 18 ), ExtResource( 13 ) ],
+"ice": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 21 ) ],
+"snow": [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 15 ) ],
+"wood": [ ExtResource( 3 ), ExtResource( 19 ), ExtResource( 8 ) ]
+}
+stepsRunArray = {
+"dirt": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"ice": [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 14 ) ],
+"snow": [ ExtResource( 22 ), ExtResource( 11 ), ExtResource( 23 ) ],
+"wood": [ ExtResource( 3 ), ExtResource( 19 ), ExtResource( 8 ) ]
+}
+
+[node name="camera" type="Camera2D" parent="." index="8"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.1
+drag_margin_top = 0.05
+drag_margin_right = 0.1
+drag_margin_bottom = 0.05
+
+[node name="interactArea" type="Area2D" parent="." index="9"]
+collision_layer = 3
+collision_mask = 3
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="interactArea" index="0"]
+shape = SubResource( 1 )

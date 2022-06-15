@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/houses/barn/barn_back.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/houses/barn/barn_closed.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 92.7883, 73.1389 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19.0828, 52.4641 )
+
+[node name="Barn" type="StaticBody2D"]
+
+[node name="Sprite_back" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 0, -115 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="hidePlace" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( -5, -4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -115 )
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 4 )
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( -0.629974, -92.1374 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="shape2" type="CollisionShape2D" parent="."]
+position = Vector2( -1.25992, -204.481 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="hints" parent="." instance=ExtResource( 2 )]

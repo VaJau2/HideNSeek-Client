@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/trees/tree3.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox_open.png" type="Texture" id=2]
+[ext_resource path="res://objects/characters/character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox_back.png" type="Texture" id=5]
+[ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/materials/themes/very_bix_text_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/scripts/interface/MainMenu.gd" type="Script" id=8]
+[ext_resource path="res://objects/interface/ConnectModal.tscn" type="PackedScene" id=9]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ColorRect
+
+var fade_speed = 2
+
+
+func _ready():
+	set_process(false)
+	yield(get_tree().create_timer(0.5), \"timeout\")
+	set_process(true)
+
+
+func _process(delta):
+	if (color.a > 0):
+		color.a -= delta * fade_speed
+		return
+	queue_free()
+"
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="back" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="name" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -80.0
+margin_top = 72.0
+margin_right = 72.0
+margin_bottom = 103.0
+theme = ExtResource( 7 )
+text = "Hide'n Seek"
+align = 1
+
+[node name="connect" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = -108.0
+margin_right = 320.0
+margin_bottom = -84.0
+theme = ExtResource( 6 )
+text = "Подключиться"
+
+[node name="character_settings" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = -68.0
+margin_right = 320.0
+margin_bottom = -44.0
+theme = ExtResource( 6 )
+text = "Настроить персонажа"
+
+[node name="game_settings" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = -28.0
+margin_right = 320.0
+margin_bottom = -4.0
+theme = ExtResource( 6 )
+text = "Настройки игры"
+
+[node name="help" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = 12.0
+margin_right = 320.0
+margin_bottom = 36.0
+theme = ExtResource( 6 )
+text = "Помощь"
+
+[node name="exit" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = 52.0
+margin_right = 320.0
+margin_bottom = 76.0
+theme = ExtResource( 6 )
+text = "Выход"
+
+[node name="sprites" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 0.453
+anchor_right = 1.0
+anchor_bottom = 0.453
+margin_left = -424.0
+margin_top = 8.19998
+margin_bottom = 248.2
+
+[node name="Tree3" type="Sprite" parent="sprites"]
+position = Vector2( 206, -42.5 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 1 )
+
+[node name="PresentBox2" type="Sprite" parent="sprites"]
+position = Vector2( 99, 53.5 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 4 )
+
+[node name="PresentBoxBack" type="Sprite" parent="sprites"]
+position = Vector2( 144, 120 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="character" parent="sprites" instance=ExtResource( 3 )]
+position = Vector2( 150, 157.5 )
+scale = Vector2( -3, 3 )
+
+[node name="PresentBoxOpen" type="Sprite" parent="sprites"]
+position = Vector2( 144, 120 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="PresentBox" type="Sprite" parent="sprites"]
+position = Vector2( 262, 149.5 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 4 )
+
+[node name="ConnectModalBack" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="front" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+script = SubResource( 1 )
+
+[connection signal="pressed" from="connect" to="ConnectModalBack" method="show_connect_modal"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
