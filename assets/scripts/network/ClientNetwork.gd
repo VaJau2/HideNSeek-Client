@@ -7,11 +7,12 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "connected_ok")
 	get_tree().connect("connection_failed", self, "connected_fail")
 	get_tree().connect("server_disconnected", self, "server_disconnected")
+	G.network = self
 
 
-func disconnect_from_server(peer = null):
-	if peer: peer.close_connection()
-	get_tree().network_peer = null
+func disconnect_from_server():
+	if (get_tree().network_peer):
+		get_tree().network_peer.close_connection()
 
 
 func connect_to_server(ip, port):

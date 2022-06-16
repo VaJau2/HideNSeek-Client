@@ -6,8 +6,6 @@ extends KinematicBody2D
 
 class_name Character
 
-export var is_player = false
-
 #переменные состояния
 const SEARCH_WAIT_TIME = 0.9
 
@@ -29,6 +27,7 @@ onready var audi = get_node("audi")
 onready var anim = get_node("anim")
 var velocity = Vector2()
 var dir = Vector2()
+var flipX = false
 var speed = 120
 var run_speed = 200
 var acceleration = 800
@@ -59,10 +58,8 @@ func changeParent(new_parent) -> void:
 	global_position = pos
 
 
-
 func changeAnimation(newAnimation: String) -> void:
 	anim.play(newAnimation)
-
 
 
 func updateVelocity(delta: float) -> void:
@@ -79,9 +76,10 @@ func updateVelocity(delta: float) -> void:
 
 
 func setFlipX(flipOn: bool) -> void:
-	if $sprites.scale.x > 0 && !flipOn:
-		seekArea.position.x *= -1
+	if flipX == flipOn: return
+	seekArea.position.x *= -1
 	$sprites.scale.x = -1 if flipOn else 1
+	flipX = flipOn
 
 
 func _process(delta):

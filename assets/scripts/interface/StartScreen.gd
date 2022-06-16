@@ -2,7 +2,6 @@ extends Control
 
 onready var levelsLoader = get_node("/root/Main")
 onready var input = get_node("input")
-onready var main_menu_prefab = load("res://objects/interface/MainMenu.tscn")
 
 
 func _ready():

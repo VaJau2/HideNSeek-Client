@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprites/Furniture/box/box_back.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/Furniture/box/box.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/furniture/box/box_back.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/furniture/box/box.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.234, 19.0454 )
