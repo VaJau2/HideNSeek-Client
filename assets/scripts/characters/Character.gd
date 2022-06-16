@@ -6,11 +6,19 @@ extends KinematicBody2D
 
 class_name Character
 
-#переменные состояния
 const SEARCH_WAIT_TIME = 0.9
 
 const NPC_ILDE_COLLISION = 2
 const NPC_LOST_COLLISION = 4
+
+
+const MATERIAL_ACCELS = {
+	"snow": 1000,
+	"ice": 400
+}
+
+const SEE_IDLE_INCREMENT   = 1.0
+const SEE_HIDING_INCREMENT = 0.5
 
 
 enum waitStates {none, waiting, searching, hiding}
@@ -36,14 +44,6 @@ onready var seekArea = get_node("seekArea")
 onready var messageLabel = get_node("labelNode/message")
 var messageTimer = 0
 var messageCount = false
-
-const MATERIAL_ACCELS = {
-	"snow": 1000,
-	"ice": 400
-}
-
-const SEE_IDLE_INCREMENT   = 1.0
-const SEE_HIDING_INCREMENT = 0.5
 
 
 func changeCollision(layer: int) -> void:
