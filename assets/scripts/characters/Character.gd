@@ -33,6 +33,7 @@ var myProp = null
 #переменные для перемещения
 onready var audi = get_node("audi")
 onready var anim = get_node("anim")
+onready var parts = get_node("sprites")
 var velocity = Vector2()
 var dir = Vector2()
 var flipX = false

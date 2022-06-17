@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var current_level = null
 var current_menu = null

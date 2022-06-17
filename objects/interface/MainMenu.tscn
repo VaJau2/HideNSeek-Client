@@ -153,4 +153,5 @@ color = Color( 0, 0, 0, 1 )
 script = SubResource( 1 )
 
 [connection signal="pressed" from="connect" to="ConnectModalBack" method="show_connect_modal"]
+[connection signal="pressed" from="character_settings" to="." method="_on_character_settings_pressed"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

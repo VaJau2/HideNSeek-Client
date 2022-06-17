@@ -5,8 +5,8 @@ export var trigger_change_path: NodePath
 export var check_part_path: NodePath
 
 var part_id = 0
-var trigger_change = null
-var check_part = null
+var trigger_change = null #часть, которая будет меняться сразу после этой
+var check_part = null #часть, которая проверяется на наличие (если включено, добавляется в название через "_")
 
 
 func _ready():

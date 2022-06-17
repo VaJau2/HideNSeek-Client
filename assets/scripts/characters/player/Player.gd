@@ -57,6 +57,7 @@ func updateKeys():
 
 
 func _ready():
+	parts.load_from_settings()
 	G.player = self
 	G.currentCamera = mainCamera
 	

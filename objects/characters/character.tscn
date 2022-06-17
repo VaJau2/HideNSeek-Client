@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/scripts/characters/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/characters/base/base.png" type="Texture" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://assets/audio/steps/dirt/run3.wav" type="AudioStream" id=25]
 [ext_resource path="res://assets/audio/steps/ice/run3.wav" type="AudioStream" id=26]
 [ext_resource path="res://assets/audio/steps/ice/run1.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/scripts/characters/BodyPartsManager.gd" type="Script" id=28]
 [ext_resource path="res://assets/sprites/characters/base/eyes_back.png" type="Texture" id=29]
 [ext_resource path="res://assets/sprites/characters/base/eyes.png" type="Texture" id=32]
 [ext_resource path="res://assets/sprites/characters/base/open_mouth.png" type="Texture" id=33]
@@ -1534,6 +1535,7 @@ texture = ExtResource( 6 )
 
 [node name="sprites" type="Node2D" parent="."]
 position = Vector2( 0, -25 )
+script = ExtResource( 28 )
 
 [node name="Base" type="Sprite" parent="sprites"]
 texture = ExtResource( 2 )

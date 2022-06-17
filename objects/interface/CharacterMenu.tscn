@@ -14,9 +14,9 @@ script = ExtResource( 3 )
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 128.0
-margin_top = -164.0
+margin_top = -196.0
 margin_right = 320.0
-margin_bottom = -140.0
+margin_bottom = -172.0
 theme = ExtResource( 2 )
 text = "Назад"
 
@@ -24,11 +24,21 @@ text = "Назад"
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 128.0
-margin_top = -124.0
+margin_top = -156.0
 margin_right = 320.0
-margin_bottom = -100.0
+margin_bottom = -132.0
 theme = ExtResource( 2 )
 text = "Сохранить"
+
+[node name="random" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = -116.0
+margin_right = 320.0
+margin_bottom = -92.0
+theme = ExtResource( 2 )
+text = "Рандом"
 
 [node name="partsLabel" type="Label" parent="."]
 anchor_top = 0.5
@@ -62,14 +72,37 @@ margin_top = -20.0
 margin_right = 320.0
 margin_bottom = 12.0
 theme = ExtResource( 2 )
+edit_alpha = false
 
-[node name="nameLabel" type="Label" parent="."]
+[node name="eyesColorLabel" type="Label" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 128.0
 margin_top = 28.0
 margin_right = 320.0
 margin_bottom = 52.0
+theme = ExtResource( 2 )
+text = "Цвет глаз"
+align = 1
+valign = 1
+
+[node name="eyesColor" type="ColorPickerButton" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = 68.0
+margin_right = 320.0
+margin_bottom = 100.0
+theme = ExtResource( 2 )
+edit_alpha = false
+
+[node name="nameLabel" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = 140.0
+margin_right = 320.0
+margin_bottom = 164.0
 theme = ExtResource( 2 )
 text = "Имя"
 align = 1
@@ -79,9 +112,9 @@ valign = 1
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 128.0
-margin_top = 68.0
+margin_top = 180.0
 margin_right = 320.0
-margin_bottom = 100.0
+margin_bottom = 212.0
 theme = ExtResource( 2 )
 align = 1
 
@@ -142,6 +175,7 @@ margin_top = 152.0
 margin_right = 192.0
 margin_bottom = 184.0
 theme = ExtResource( 2 )
+edit_alpha = false
 
 [node name="characterBack" type="Control" parent="."]
 anchor_left = 1.0
@@ -156,7 +190,11 @@ margin_bottom = 224.0
 position = Vector2( 192, 288 )
 scale = Vector2( -4, 4 )
 
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="random" to="." method="_on_random_pressed"]
 [connection signal="color_changed" from="mainColor" to="." method="_on_mainColor_color_changed"]
+[connection signal="color_changed" from="eyesColor" to="." method="_on_eyesColor_color_changed"]
 [connection signal="item_selected" from="parts" to="." method="_on_parts_item_selected"]
 [connection signal="value_changed" from="parts_more/part_id" to="." method="_on_part_id_value_changed"]
 [connection signal="color_changed" from="parts_more/part_color" to="." method="_on_part_color_color_changed"]
