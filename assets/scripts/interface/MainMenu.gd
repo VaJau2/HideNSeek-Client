@@ -5,7 +5,7 @@ onready var character = get_node("sprites/character") as Character
 
 
 func _ready():
-	character.changeAnimation("hide2")
+	character.change_animation("hide2")
 	if G.settings.has("body_color"):
 		character.parts.load_from_settings()
 	else:

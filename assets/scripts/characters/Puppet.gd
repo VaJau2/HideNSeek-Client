@@ -16,7 +16,7 @@ func sync_position(data):
 func sync_movement(data):
 	self.dir = data.dir
 	self.is_running = data.is_running
-	setFlipX(data.flip_x)
+	set_flip_x(data.flip_x)
 	sync_wait_timer = SYNC_WAIT_TIME
 
 
@@ -32,4 +32,4 @@ func _process(delta):
 		waitTime -= delta
 		return
 	
-	updateVelocity(delta)
+	update_velocity(delta)

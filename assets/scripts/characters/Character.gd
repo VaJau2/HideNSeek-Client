@@ -20,6 +20,8 @@ const MATERIAL_ACCELS = {
 const SEE_IDLE_INCREMENT   = 1.0
 const SEE_HIDING_INCREMENT = 0.5
 
+const SPEAK_NOT_ANIMATE_CHARS = ["*", "{", "[", "("]
+
 
 enum waitStates {none, waiting, searching, hiding}
 var waitState = waitStates.none
@@ -47,23 +49,38 @@ var messageTimer = 0
 var messageCount = false
 
 
-func changeCollision(layer: int) -> void:
+func show_message(message):
+	var messageTime = 2 + message.length() / 10
+	messageLabel.text = message
+	messageTimer = messageTime
+	messageCount = true
+	
+	var animate = true
+	for notAnimateChar in SPEAK_NOT_ANIMATE_CHARS:
+		if message.begins_with(notAnimateChar): 
+			animate = false
+			break
+	
+	if animate: parts.animateMouth(messageTime)
+
+
+func change_collision(layer: int) -> void:
 	collision_layer = layer
 	collision_mask = layer
 
 
-func changeParent(new_parent) -> void:
+func change_parent(new_parent) -> void:
 	var pos = global_position
 	get_parent().remove_child(self)
 	new_parent.add_child(self)
 	global_position = pos
 
 
-func changeAnimation(newAnimation: String) -> void:
+func change_animation(newAnimation: String) -> void:
 	anim.play(newAnimation)
 
 
-func updateVelocity(delta: float) -> void:
+func update_velocity(delta: float) -> void:
 	var temp_speed = run_speed if (is_running) else speed
 	var temp_anim = "idle"
 	if dir.length() > 0:
@@ -71,12 +88,12 @@ func updateVelocity(delta: float) -> void:
 	
 	if !is_hiding && (waitState == waitStates.none):
 		velocity = velocity.move_toward(dir * temp_speed, acceleration * delta)
-		changeAnimation(temp_anim)
+		change_animation(temp_anim)
 	else:
 		velocity = Vector2(0, 0)
 
 
-func setFlipX(flipOn: bool) -> void:
+func set_flip_x(flipOn: bool) -> void:
 	if flipX == flipOn: return
 	seekArea.position.x *= -1
 	$sprites.scale.x = -1 if flipOn else 1

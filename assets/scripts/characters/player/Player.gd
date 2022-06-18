@@ -11,6 +11,12 @@ var sync_position_timer = SYNC_POSITION_TIME
 var sync_stop_onetime = false
 
 
+func show_message(message):
+	.show_message(message)
+	var player_id = get_tree().network_peer.get_unique_id()
+	G.network.rpc_id(1, "say_message", player_id, message)
+
+
 func sync_movement():
 	var is_stopped = velocity.length() == 0
 	
@@ -38,7 +44,7 @@ func sync_position():
 	G.network.rpc_unreliable_id(1, "sync_player_position", data)
 
 
-func updateKeys():
+func update_keys():
 	if mayMove:
 		if (Input.is_action_pressed("ui_shift")):
 			is_running = true
@@ -50,10 +56,10 @@ func updateKeys():
 		
 		if (Input.is_action_pressed("ui_left")):
 			dir.x = -1
-			setFlipX(true)
+			set_flip_x(true)
 		elif (Input.is_action_pressed("ui_right")):
 			dir.x = 1
-			setFlipX(false)
+			set_flip_x(false)
 
 
 func _ready():
@@ -62,7 +68,7 @@ func _ready():
 	G.currentCamera = mainCamera
 	
 	var player_id = get_tree().network_peer.get_unique_id()
-	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, parts.get_data_to_server())
+	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, flipX, parts.get_data_to_server())
 
 
 func _process(delta):
@@ -80,7 +86,7 @@ func _process(delta):
 		sync_position_timer = SYNC_POSITION_TIME
 		sync_position()
 	
-	updateKeys()
-	updateVelocity(delta)
+	update_keys()
+	update_velocity(delta)
 	sync_movement()
 

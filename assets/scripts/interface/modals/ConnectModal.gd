@@ -52,5 +52,5 @@ func connected_fail():
 
 func connected_ok():
 	var levelsLoader = get_node("/root/Main")
-	levelsLoader.change_menu("")
+	levelsLoader.change_menu("res://objects/interface/PauseMenu.tscn")
 	levelsLoader.load_level("Level1")

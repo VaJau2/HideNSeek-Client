@@ -1663,11 +1663,14 @@ anims/walk = SubResource( 8 )
 z_index = 5
 
 [node name="message" type="Label" parent="labelNode"]
-margin_left = -84.4445
-margin_top = -52.2222
-margin_right = 262.556
-margin_bottom = -38.2222
-rect_scale = Vector2( 0.5, 0.5 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -173.5
+margin_top = -60.0
+margin_right = 173.5
+margin_bottom = -46.0
 theme = ExtResource( 34 )
 align = 1
 

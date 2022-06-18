@@ -23,11 +23,12 @@ func get_puppet(id):
 	return puppets_parent.get_node_or_null(puppet_name)
 
 
-func spawn_puppet(id, position, partsData):
+func spawn_puppet(id, position, flipX, partsData):
 	var new_puppet = puppet_prefab.instance()
 	new_puppet.name = get_puppet_name(id)
 	puppets_parent.add_child(new_puppet)
 	new_puppet.position = position
+	new_puppet.set_flip_x(flipX)
 	new_puppet.parts.load_from_server(partsData)
 
 
@@ -44,3 +45,8 @@ func sync_puppet_movement(data):
 func sync_puppet_position(data):
 	var sync_puppet = get_puppet(data.player_id)
 	if sync_puppet: sync_puppet.sync_position(data)
+
+
+func show_message(puppet_id, message):
+	var message_puppet = get_puppet(puppet_id)
+	message_puppet.show_message(message)

@@ -15,7 +15,7 @@ var ignore_type_check = false
 
 
 func _ready():
-	character.changeAnimation("idle")
+	character.change_animation("idle")
 	character.parts.load_variants()
 	character.parts.load_from_settings()
 	mainColorPicker.color = character.get_node("sprites/Base").modulate

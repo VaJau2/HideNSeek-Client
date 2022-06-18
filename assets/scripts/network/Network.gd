@@ -20,10 +20,10 @@ remote func force_disconnect(error = ""):
 	get_parent().current_error = error
 
 
-remote func spawn_puppet(id, position, partsData):
+remote func spawn_puppet(id, position, flipX, partsData):
 	if (id == get_tree().network_peer.get_unique_id()): return
 	var puppets_manager = get_node_or_null("/root/Main/Scene")
-	if puppets_manager: puppets_manager.spawn_puppet(id, position, partsData)
+	if puppets_manager: puppets_manager.spawn_puppet(id, position, flipX, partsData)
 
 
 remote func despawn_puppet(id):
@@ -48,9 +48,19 @@ remote func sync_puppet_position(data):
 		if puppets_manager: puppets_manager.sync_puppet_position(data)
 
 
+remote func say_message(player_id, message):
+	if (player_id == get_tree().network_peer.get_unique_id()): return
+	var puppets_manager = get_node_or_null("/root/Main/Scene")
+	if puppets_manager: puppets_manager.show_message(player_id, message)
+
+
 remote func add_message_to_chat(name, message):
-	pass
+	var chat = get_node_or_null("/root/Main/canvas/PauseMenu/Chat")
+	if (chat == null || name == null || message == null): return
+	chat.add_message(name, message)
 
 
 remote func update_chat_text(new_text):
-	pass
+	var chat = get_node_or_null("/root/Main/canvas/PauseMenu/Chat")
+	if (chat == null || new_text == null): return
+	chat.update_chat(new_text)

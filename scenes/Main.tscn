@@ -13,6 +13,7 @@ script = ExtResource( 5 )
 script = ExtResource( 4 )
 
 [node name="canvas" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="StartScreen" type="Control" parent="canvas"]
 anchor_right = 1.0

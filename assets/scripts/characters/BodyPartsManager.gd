@@ -2,6 +2,13 @@ extends Node2D
 
 var variants = {}
 
+const OPEN_MOUTH_TIME = 0.25
+
+var animateMouth = false
+var animateMouthTimer = 0
+var openMouth = false
+var openMouthTimer = 0
+
 
 #загружает все варианты частей из папок
 #названия спрайтов должны соответствовать папкам
@@ -118,3 +125,25 @@ func load_from_server(data: Dictionary) -> void:
 		var key = "part_" + part.name
 		part.set_part_id(data[key + "_id"])
 		part.modulate = Color(data[key + "_color"])
+
+
+func animateMouth(time):
+	animateMouth = true
+	animateMouthTimer = time
+
+
+func _process(delta):
+	if animateMouth:
+		if animateMouthTimer > 0:
+			animateMouthTimer -= delta
+			
+			if (openMouthTimer > 0):
+				openMouthTimer -= delta
+			else:
+				$Base/OpenMouth.visible = openMouth
+				openMouth = !openMouth
+				openMouthTimer = OPEN_MOUTH_TIME
+		else:
+			openMouth = false
+			$Base/OpenMouth.visible = false
+			animateMouth = false

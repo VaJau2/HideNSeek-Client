@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/scripts/interface/modals/SpeakModal.gd" type="Script" id=2]
+[ext_resource path="res://assets/materials/themes/chat_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/scripts/interface/Chat.gd" type="Script" id=4]
+
+[node name="PauseMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="SpeakModal" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -219.0
+margin_top = -59.0
+margin_right = 219.0
+margin_bottom = 59.0
+theme = ExtResource( 1 )
+window_title = "Enter - сказать"
+script = ExtResource( 2 )
+
+[node name="LineEdit" type="LineEdit" parent="SpeakModal"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -189.0
+margin_top = -16.5
+margin_right = 189.0
+margin_bottom = 16.5
+theme = ExtResource( 1 )
+max_length = 52
+
+[node name="Chat" type="Control" parent="."]
+margin_top = 20.0
+margin_right = 305.0
+margin_bottom = 240.0
+script = ExtResource( 4 )
+
+[node name="label" type="RichTextLabel" parent="Chat"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+theme = ExtResource( 3 )
+bbcode_enabled = true
+text = "тест"
+scroll_following = true
+
+[connection signal="hide" from="SpeakModal" to="SpeakModal" method="_on_SpeakModal_hide"]

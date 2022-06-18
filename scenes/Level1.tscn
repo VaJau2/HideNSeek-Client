@@ -598,12 +598,12 @@ __meta__ = {
 visible = false
 
 [node name="canvas" type="CanvasLayer" parent="."]
-layer = 2
 
 [node name="snowShader" type="ColorRect" parent="canvas"]
 material = SubResource( 33 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = SubResource( 34 )
 __meta__ = {
 "_edit_lock_": true,
@@ -613,6 +613,7 @@ __meta__ = {
 [node name="background" type="ColorRect" parent="canvas"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 color = Color( 0, 0, 0, 0 )
 script = SubResource( 35 )
 __meta__ = {
