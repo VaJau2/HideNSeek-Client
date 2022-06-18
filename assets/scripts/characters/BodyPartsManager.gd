@@ -52,7 +52,7 @@ func randomize_variants() -> void:
 				part.modulate = hair_color
 			"Boots", "Scarf", "Hat":
 				part.modulate = outfut_color
-			"Socks", "Jacket":
+			"Socks", "Jacket", "Bow":
 				part.modulate = outfut2_color
 
 
