@@ -20,10 +20,10 @@ remote func force_disconnect(error = ""):
 	get_parent().current_error = error
 
 
-remote func spawn_puppet(id, position):
+remote func spawn_puppet(id, position, partsData):
 	if (id == get_tree().network_peer.get_unique_id()): return
 	var puppets_manager = get_node_or_null("/root/Main/Scene")
-	if puppets_manager: puppets_manager.spawn_puppet(id, position)
+	if puppets_manager: puppets_manager.spawn_puppet(id, position, partsData)
 
 
 remote func despawn_puppet(id):

@@ -23,11 +23,12 @@ func get_puppet(id):
 	return puppets_parent.get_node_or_null(puppet_name)
 
 
-func spawn_puppet(id, position):
+func spawn_puppet(id, position, partsData):
 	var new_puppet = puppet_prefab.instance()
 	new_puppet.name = get_puppet_name(id)
 	puppets_parent.add_child(new_puppet)
 	new_puppet.position = position
+	new_puppet.parts.load_from_server(partsData)
 
 
 func despawn_puppet(id):

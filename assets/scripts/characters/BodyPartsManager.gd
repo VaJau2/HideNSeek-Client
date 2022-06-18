@@ -19,7 +19,8 @@ func load_variants() -> void:
 		while true:
 			var file_name = dir.get_next()
 			if file_name == "": break
-			elif !file_name.begins_with(".") && !file_name.ends_with(".import"):
+			#судя по всему, в билде dir видит только ".import" файлы
+			elif !file_name.begins_with(".") && file_name.ends_with(".import"):
 				var part_name = file_name.split(".")[0]
 				variants[part.name][part_name] = part_name
 		dir.list_dir_end()
@@ -78,7 +79,7 @@ func load_from_settings() -> void:
 	var eyes_color = G.settings.get("eyes_color")
 	if !eyes_color: return
 	$Eyes.modulate = Color(eyes_color)
-
+	
 	var parts = get_children()
 	for part in parts:
 		if !part.is_in_group("body_part"): continue
@@ -91,3 +92,29 @@ func load_from_settings() -> void:
 		var part_id = int(G.settings.get(key + "_id"))
 		if part_id <= 0: continue
 		part.set_part_id(part_id)
+
+
+func get_data_to_server() -> Dictionary:
+	var data = {}
+	data.body_color = G.settings.get("body_color")
+	data.eyes_color = G.settings.get("eyes_color")
+	
+	var parts = get_children()
+	for part in parts:
+		if !part.is_in_group("body_part"): continue
+		var key = "part_" + part.name
+		data[key + "_id"] = int(G.settings.get(key + "_id"))
+		data[key + "_color"] = G.settings.get(key + "_color")
+	
+	return data
+
+
+func load_from_server(data: Dictionary) -> void:
+	$Base.modulate = Color(data.body_color)
+	$Eyes.modulate = Color(data.eyes_color)
+	var parts = get_children()
+	for part in parts:
+		if !part.is_in_group("body_part"): continue
+		var key = "part_" + part.name
+		part.set_part_id(data[key + "_id"])
+		part.modulate = Color(data[key + "_color"])

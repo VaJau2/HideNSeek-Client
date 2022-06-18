@@ -62,7 +62,7 @@ func _ready():
 	G.currentCamera = mainCamera
 	
 	var player_id = get_tree().network_peer.get_unique_id()
-	G.network.rpc_id(1, "spawn_player_in_map", player_id, position)
+	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, parts.get_data_to_server())
 
 
 func _process(delta):
