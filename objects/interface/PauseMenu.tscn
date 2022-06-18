@@ -48,7 +48,6 @@ anchor_bottom = 1.0
 margin_left = 13.0
 theme = ExtResource( 3 )
 bbcode_enabled = true
-text = "тест"
 scroll_following = true
 
 [connection signal="hide" from="SpeakModal" to="SpeakModal" method="_on_SpeakModal_hide"]

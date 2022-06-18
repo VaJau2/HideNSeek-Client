@@ -20,6 +20,7 @@ func set_player_name() -> bool:
 		input.text = "Пожалуйста, введите нормальное имя"
 		return false
 	G.settings.set("player_name", player_name)
+	G.settings.set("gender", "female")
 	return true
 
 

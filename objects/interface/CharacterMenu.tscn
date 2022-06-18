@@ -103,6 +103,7 @@ margin_left = 128.0
 margin_top = 140.0
 margin_right = 320.0
 margin_bottom = 164.0
+rect_pivot_offset = Vector2( 96, 16 )
 theme = ExtResource( 2 )
 text = "Имя"
 align = 1
@@ -129,6 +130,32 @@ theme = ExtResource( 2 )
 text = "Выбрать часть"
 align = 1
 items = [ "Выбрать часть", null, false, 0, null ]
+selected = 0
+
+[node name="genderLabel" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 384.0
+margin_top = 140.0
+margin_right = 576.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( 96, 16 )
+theme = ExtResource( 2 )
+text = "Пол персонажа"
+align = 1
+valign = 1
+
+[node name="gender" type="OptionButton" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 384.0
+margin_top = 188.0
+margin_right = 576.0
+margin_bottom = 212.0
+theme = ExtResource( 2 )
+text = "Женский"
+align = 1
+items = [ "Женский", null, false, 0, null, "Мужской", null, false, 1, null ]
 selected = 0
 
 [node name="parts_more" type="Control" parent="."]
@@ -196,5 +223,6 @@ scale = Vector2( -4, 4 )
 [connection signal="color_changed" from="mainColor" to="." method="_on_mainColor_color_changed"]
 [connection signal="color_changed" from="eyesColor" to="." method="_on_eyesColor_color_changed"]
 [connection signal="item_selected" from="parts" to="." method="_on_parts_item_selected"]
+[connection signal="item_selected" from="gender" to="." method="_on_gender_item_selected"]
 [connection signal="value_changed" from="parts_more/part_id" to="." method="_on_part_id_value_changed"]
 [connection signal="color_changed" from="parts_more/part_color" to="." method="_on_part_color_color_changed"]

@@ -1,5 +1,10 @@
 extends ColorRect
 
+const GENDERS = {
+	0: "female",
+	1: "male"
+}
+
 
 onready var levelsLoader = get_node("/root/Main")
 onready var character = get_node("characterBack/character")
@@ -22,6 +27,7 @@ func _ready():
 	eyesColorPicker.color = character.get_node("sprites/Eyes").modulate
 	load_body_parts()
 	load_name()
+	load_gender()
 
 
 func load_body_parts():
@@ -33,6 +39,14 @@ func load_body_parts():
 
 func load_name():
 	$name.text = G.settings.get("player_name")
+
+
+func load_gender():
+	var gender_name = G.settings.get("gender")
+	for gender_id in GENDERS:
+		if GENDERS[gender_id] == gender_name:
+			$gender.selected = gender_id
+			return
 
 
 func _on_parts_item_selected(index):
@@ -66,6 +80,11 @@ func _on_part_id_value_changed(value):
 	temp_body_part.set_part_id(int(value))
 
 
+func _on_gender_item_selected(index):
+	if GENDERS.has(index):
+		G.settings.set("gender", GENDERS[index])
+
+
 func _on_save_pressed():
 	G.settings.set("player_name", $name.text) 
 	character.parts.save_to_settings()
@@ -83,3 +102,4 @@ func _on_random_pressed():
 	if temp_body_part:
 		partColorPicker.color = temp_body_part.modulate
 		partIdInput.value = temp_body_part.part_id
+		

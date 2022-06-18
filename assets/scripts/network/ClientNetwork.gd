@@ -28,7 +28,8 @@ func connect_to_server(ip, port):
 func connected_ok():
 	var player_id = get_tree().network_peer.get_unique_id()
 	var player_name = G.settings.get("player_name")
-	rpc("add_player", player_id, player_name)
+	var character_gender = G.settings.get("gender")
+	rpc_id(1, "add_player", player_id, player_name, character_gender)
 
 
 func connected_fail():
