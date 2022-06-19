@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://objects/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/sprites/trees/tree3.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/sprites/shadows/treeShadow.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/trees/tree1.png" type="Texture" id=23]
 [ext_resource path="res://assets/scripts/characters/PuppetsManager.gd" type="Script" id=24]
+[ext_resource path="res://objects/furniture/Bell.tscn" type="PackedScene" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37.5189, 10 )
@@ -587,6 +588,11 @@ position = Vector2( 623.5, -808.204 )
 
 [node name="lamp8" parent="props/lamps" instance=ExtResource( 9 )]
 position = Vector2( 666.284, -535.869 )
+
+[node name="bell" type="Node2D" parent="props" groups=["sorting"]]
+
+[node name="Bell" parent="props/bell" instance=ExtResource( 25 )]
+position = Vector2( 869, -187 )
 
 [node name="npc" type="YSort" parent="."]
 script = ExtResource( 20 )

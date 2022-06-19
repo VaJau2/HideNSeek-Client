@@ -64,3 +64,17 @@ remote func update_chat_text(new_text):
 	var chat = get_node_or_null("/root/Main/canvas/PauseMenu/Chat")
 	if (chat == null || new_text == null): return
 	chat.update_chat(new_text)
+
+
+remote func sync_interact(player_id, object_path):
+	if (player_id == get_tree().network_peer.get_unique_id()): return
+	var puppets_manager = get_node_or_null("/root/Main/Scene")
+	if puppets_manager: puppets_manager.sync_interact(player_id, object_path)
+
+
+remote func sync_state(player_id, new_state):
+	if (player_id == get_tree().network_peer.get_unique_id()): 
+		G.player.state = new_state
+	else:
+		var puppets_manager = get_node_or_null("/root/Main/Scene")
+		if puppets_manager: puppets_manager.sync_state(player_id, new_state)

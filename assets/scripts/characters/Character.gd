@@ -22,9 +22,8 @@ const SEE_HIDING_INCREMENT = 0.5
 
 const SPEAK_NOT_ANIMATE_CHARS = ["*", "{", "[", "("]
 
-
-enum waitStates {none, waiting, searching, hiding}
-var waitState = waitStates.none
+enum states {none, waiting, searching, hiding}
+var state = states.none
 var waitTime = 0
 
 var is_running = false
@@ -47,6 +46,20 @@ onready var seekArea = get_node("seekArea")
 onready var messageLabel = get_node("labelNode/message")
 var messageTimer = 0
 var messageCount = false
+
+
+#для игрока и паппетов имеет разную реализацию
+func change_state(new_state): 
+	state = new_state
+
+
+func is_waiting() -> bool:
+	return state != states.none
+
+
+func stop_waiting() -> void:
+	state = states.none
+	waitTime = 0
 
 
 func show_message(message):
@@ -86,7 +99,7 @@ func update_velocity(delta: float) -> void:
 	if dir.length() > 0:
 		temp_anim = "run" if (is_running) else "walk"
 	
-	if !is_hiding && (waitState == waitStates.none):
+	if !is_hiding && (state == states.none):
 		velocity = velocity.move_toward(dir * temp_speed, acceleration * delta)
 		change_animation(temp_anim)
 	else:

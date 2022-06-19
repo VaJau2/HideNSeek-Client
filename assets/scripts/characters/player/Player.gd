@@ -5,10 +5,16 @@ const SYNC_POSITION_TIME = 1
 onready var cameraBlock = get_node("/root/Main/Scene/cameraBlock")
 onready var hidingCamera = cameraBlock.get_node("cameraBody/camera")
 onready var mainCamera = get_node("camera")
-onready var interactArea = get_node("interactArea")
+onready var interact = get_node("interact")
 var mayMove = true
 var sync_position_timer = SYNC_POSITION_TIME
 var sync_stop_onetime = false
+
+
+func change_state(new_state):
+	.change_state(new_state)
+	var player_id = get_tree().network_peer.get_unique_id()
+	rpc_id(1, "sync_state", player_id, new_state)
 
 
 func show_message(message):

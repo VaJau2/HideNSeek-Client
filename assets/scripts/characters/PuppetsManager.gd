@@ -50,3 +50,15 @@ func sync_puppet_position(data):
 func show_message(puppet_id, message):
 	var message_puppet = get_puppet(puppet_id)
 	message_puppet.show_message(message)
+
+
+func sync_interact(puppet_id, obj_path):
+	var obj = get_node_or_null(obj_path)
+	if obj && obj.has_method("interact"):
+		var interact_puppet = get_puppet(puppet_id)
+		obj.interact(interact_puppet)
+
+
+func sync_state(puppet_id, new_state):
+	var state_puppet = get_puppet(puppet_id)
+	state_puppet.state = new_state

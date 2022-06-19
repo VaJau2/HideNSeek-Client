@@ -9,6 +9,12 @@ const SYNC_WAIT_TIME = 1
 var sync_wait_timer = SYNC_WAIT_TIME
 
 
+func change_state(new_state):
+	.change_state(new_state)
+	var puppet_id = name.split("_")[1]
+	rpc_id(1, "sync_state", puppet_id, new_state)
+
+
 func sync_position(data):
 	self.position = data.position
 
