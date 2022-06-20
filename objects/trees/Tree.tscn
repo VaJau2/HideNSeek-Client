@@ -7,7 +7,9 @@
 radius = 6.51916
 height = 26.8507
 
-[node name="Tree" type="KinematicBody2D"]
+[node name="Tree" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.21022, -25.1373 )

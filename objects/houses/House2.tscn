@@ -13,6 +13,8 @@ extents = Vector2( 38.3776, 35.7269 )
 extents = Vector2( 121.231, 9.89088 )
 
 [node name="House" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -56.73 )
@@ -37,5 +39,6 @@ shape = SubResource( 2 )
 [node name="shape2" type="CollisionShape2D" parent="opacityArea"]
 position = Vector2( 0.445473, 17.818 )
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="opacityArea" to="opacityArea" method="_on_opacityArea_body_entered"]
 [connection signal="body_exited" from="opacityArea" to="opacityArea" method="_on_opacityArea_body_exited"]

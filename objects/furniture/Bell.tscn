@@ -38,9 +38,11 @@ tracks/0/keys = {
 }
 
 [node name="Bell" instance=ExtResource( 3 )]
+collision_layer = 2147483651
+collision_mask = 3
 
-[node name="Area2D" parent="." index="1"]
-monitorable = false
+[node name="hints" parent="." index="1"]
+position = Vector2( -15, -15 )
 
 [node name="shadow" type="Sprite" parent="." index="2"]
 modulate = Color( 1, 1, 1, 0.392157 )
@@ -60,8 +62,8 @@ texture = ExtResource( 1 )
 hframes = 5
 vframes = 2
 
-[node name="hints" parent="." index="5"]
-position = Vector2( -15, -15 )
+[node name="Area2D" parent="." index="5"]
+monitorable = false
 
 [node name="anim" type="AnimationPlayer" parent="." index="6"]
 playback_speed = 1.5
