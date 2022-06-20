@@ -14,7 +14,7 @@ func _process(_delta):
 		if Input.is_action_just_pressed(USE_ACTION):
 			var player_id = get_tree().network_peer.get_unique_id()
 			G.network.rpc_id(1, "sync_interact", player_id, tempInteractObj.get_path())
-			tempInteractObj.interact(self)
+			tempInteractObj.interact(get_parent())
 	else:
 		hide_labels()
 

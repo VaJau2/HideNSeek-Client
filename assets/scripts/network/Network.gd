@@ -1,14 +1,8 @@
 extends ClientNetwork
 
-var timestamp = 0
-
 
 func server_disconnected():
 	force_disconnect("Сервер внезапно выключился")
-
-
-remote func set_server_timestamp(timestamp):
-	G.server_timestamp = timestamp
 
 
 remote func force_disconnect(error = ""):
@@ -78,3 +72,25 @@ remote func sync_state(player_id, new_state):
 	else:
 		var puppets_manager = get_node_or_null("/root/Main/Scene")
 		if puppets_manager: puppets_manager.sync_state(player_id, new_state)
+
+
+remote func teleport(start_point_id):
+	var startPoints = get_node("/root/Main/Scene/startPoints")
+	startPoints.teleport_to_point(start_point_id)
+
+
+remote func start_game(is_searcher):
+	G.player.may_move = true
+	if is_searcher:
+		G.player.set_state(Character.states.wait)
+	else:
+		G.player.set_state(Character.states.hide)
+
+
+remote func stop_waiting():
+	if G.player.state == Character.states.wait:
+		G.player.set_state(Character.states.search)
+
+
+remote func count_timer(time):
+	if game_label: game_label.show_time(time)

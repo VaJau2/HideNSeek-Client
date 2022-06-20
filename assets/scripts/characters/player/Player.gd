@@ -2,19 +2,23 @@ extends Character
 
 const SYNC_POSITION_TIME = 1
 
-onready var cameraBlock = get_node("/root/Main/Scene/cameraBlock")
-onready var hidingCamera = cameraBlock.get_node("cameraBody/camera")
-onready var mainCamera = get_node("camera")
+onready var black_screen = get_node("/root/Main/Scene/canvas/background")
+onready var camera_block = get_node("/root/Main/Scene/cameraBlock")
+onready var hiding_camera = camera_block.get_node("cameraBody/camera")
 onready var interact = get_node("interact")
-var mayMove = true
+var may_move = true
 var sync_position_timer = SYNC_POSITION_TIME
 var sync_stop_onetime = false
 
 
-func change_state(new_state):
-	.change_state(new_state)
+func set_state(new_state):
+	.set_state(new_state)
 	var player_id = get_tree().network_peer.get_unique_id()
-	rpc_id(1, "sync_state", player_id, new_state)
+	G.network.rpc_id(1, "sync_state", player_id, new_state)
+	
+	if new_state == states.search:
+		while black_screen.setBackgroundOff():
+			yield(get_tree(), "idle_frame")
 
 
 func show_message(message):
@@ -44,6 +48,7 @@ func sync_position():
 	var data = {
 		"player_id": get_tree().network_peer.get_unique_id(),
 		"position": position,
+		"flip_x": flipX,
 		"timestamp": OS.get_ticks_msec()
 	}
 	
@@ -51,7 +56,7 @@ func sync_position():
 
 
 func update_keys():
-	if mayMove:
+	if may_move:
 		if (Input.is_action_pressed("ui_shift")):
 			is_running = true
 		
@@ -71,7 +76,7 @@ func update_keys():
 func _ready():
 	parts.load_from_settings()
 	G.player = self
-	G.currentCamera = mainCamera
+	G.currentCamera = get_node("camera")
 	
 	var player_id = get_tree().network_peer.get_unique_id()
 	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, flipX, parts.get_data_to_server())
@@ -81,18 +86,15 @@ func _process(delta):
 	dir = Vector2(0, 0)
 	is_running = false
 	
-	if waitTime > 0:
-		velocity = Vector2(0, 0)
-		waitTime -= delta
-		return
-	
 	if sync_position_timer > 0:
 		sync_position_timer -= delta
 	else:
 		sync_position_timer = SYNC_POSITION_TIME
 		sync_position()
 	
+	if is_waiting():
+		black_screen.setBackgroundOn()
+	
 	update_keys()
 	update_velocity(delta)
 	sync_movement()
-

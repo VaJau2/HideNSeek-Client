@@ -22,14 +22,13 @@ const SEE_HIDING_INCREMENT = 0.5
 
 const SPEAK_NOT_ANIMATE_CHARS = ["*", "{", "[", "("]
 
-enum states {none, waiting, searching, hiding}
+enum states {none, wait, search, hide}
 var state = states.none
-var waitTime = 0
 
 var is_running = false
 var is_hiding = false
 var hiding_in_prop = false
-var myProp = null
+var my_prop = null
 
 #переменные для перемещения
 onready var audi = get_node("audi")
@@ -49,17 +48,14 @@ var messageCount = false
 
 
 #для игрока и паппетов имеет разную реализацию
-func change_state(new_state): 
+func set_state(new_state): 
 	state = new_state
+	if new_state == states.search:
+		show_message("Я иду искать!")
 
 
 func is_waiting() -> bool:
-	return state != states.none
-
-
-func stop_waiting() -> void:
-	state = states.none
-	waitTime = 0
+	return state == states.wait
 
 
 func show_message(message):
@@ -95,15 +91,19 @@ func change_animation(newAnimation: String) -> void:
 
 func update_velocity(delta: float) -> void:
 	var temp_speed = run_speed if (is_running) else speed
-	var temp_anim = "idle"
-	if dir.length() > 0:
-		temp_anim = "run" if (is_running) else "walk"
-	
-	if !is_hiding && (state == states.none):
+	if !is_hiding && (state != states.wait):
 		velocity = velocity.move_toward(dir * temp_speed, acceleration * delta)
-		change_animation(temp_anim)
 	else:
 		velocity = Vector2(0, 0)
+	
+	var temp_anim = "idle"
+	if velocity.length() > 0:
+		temp_anim = "run" if (is_running) else "walk"
+	
+	if state == states.wait:
+		temp_anim = "wait"
+	
+	change_animation(temp_anim)
 
 
 func set_flip_x(flipOn: bool) -> void:

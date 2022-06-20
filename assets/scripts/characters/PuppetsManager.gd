@@ -24,6 +24,7 @@ func get_puppet(id):
 
 
 func spawn_puppet(id, position, flipX, partsData):
+	if get_puppet(id) != null: return
 	var new_puppet = puppet_prefab.instance()
 	new_puppet.name = get_puppet_name(id)
 	puppets_parent.add_child(new_puppet)

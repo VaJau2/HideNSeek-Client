@@ -14,6 +14,11 @@ func interact(character):
 		audi.play()
 		is_ringing = true
 		ring_timer = RING_TIME
+		change_may_interact(false)
+		if character == G.player:
+			var player_id = get_tree().network_peer.get_unique_id()
+			G.network.rpc_id(1, "start_game", player_id)
+			
 
 
 func _process(delta):

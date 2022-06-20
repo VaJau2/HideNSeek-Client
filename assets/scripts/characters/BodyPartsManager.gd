@@ -4,7 +4,7 @@ var variants = {}
 
 const OPEN_MOUTH_TIME = 0.25
 
-var animateMouth = false
+var isAnimatingMouth = false
 var animateMouthTimer = 0
 var openMouth = false
 var openMouthTimer = 0
@@ -128,12 +128,12 @@ func load_from_server(data: Dictionary) -> void:
 
 
 func animateMouth(time):
-	animateMouth = true
+	isAnimatingMouth = true
 	animateMouthTimer = time
 
 
 func _process(delta):
-	if animateMouth:
+	if isAnimatingMouth:
 		if animateMouthTimer > 0:
 			animateMouthTimer -= delta
 			
@@ -146,4 +146,4 @@ func _process(delta):
 		else:
 			openMouth = false
 			$Base/OpenMouth.visible = false
-			animateMouth = false
+			isAnimatingMouth = false

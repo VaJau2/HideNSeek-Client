@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/scripts/interface/modals/SpeakModal.gd" type="Script" id=2]
 [ext_resource path="res://assets/materials/themes/chat_theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/scripts/interface/Chat.gd" type="Script" id=4]
+[ext_resource path="res://assets/materials/themes/bix_text_theme.tres" type="Theme" id=5]
+[ext_resource path="res://assets/scripts/interface/GameLabel.gd" type="Script" id=6]
 
 [node name="PauseMenu" type="Control"]
 anchor_right = 1.0
@@ -49,5 +51,16 @@ margin_left = 13.0
 theme = ExtResource( 3 )
 bbcode_enabled = true
 scroll_following = true
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -500.0
+margin_top = 20.0
+margin_right = 500.0
+margin_bottom = 41.0
+theme = ExtResource( 5 )
+align = 1
+script = ExtResource( 6 )
 
 [connection signal="hide" from="SpeakModal" to="SpeakModal" method="_on_SpeakModal_hide"]

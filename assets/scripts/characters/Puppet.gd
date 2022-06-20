@@ -9,14 +9,15 @@ const SYNC_WAIT_TIME = 1
 var sync_wait_timer = SYNC_WAIT_TIME
 
 
-func change_state(new_state):
-	.change_state(new_state)
+func set_state(new_state):
+	.set_state(new_state)
 	var puppet_id = name.split("_")[1]
-	rpc_id(1, "sync_state", puppet_id, new_state)
+	G.network.rpc_id(1, "sync_state", puppet_id, new_state)
 
 
 func sync_position(data):
 	self.position = data.position
+	set_flip_x(data.flip_x)
 
 
 func sync_movement(data):
@@ -32,10 +33,5 @@ func _process(delta):
 		sync_wait_timer -= delta
 	elif dir.length() > 0:
 		dir = Vector2(0, 0)
-	
-	if waitTime > 0:
-		velocity = Vector2(0, 0)
-		waitTime -= delta
-		return
 	
 	update_velocity(delta)

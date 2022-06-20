@@ -9,6 +9,11 @@ func interact(_character):
 	pass
 
 
+func change_may_interact(on: bool):
+	may_interact = on
+	if !on: _on_Area2D_body_exited(G.player)
+
+
 func _on_Area2D_body_entered(body):
 	if !may_interact: return
 	if body == G.player:
@@ -16,6 +21,5 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Area2D_body_exited(body):
-	if !may_interact: return
 	if body == G.player:
 		body.interact.remove_interact_object(self)

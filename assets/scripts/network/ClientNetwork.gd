@@ -2,6 +2,9 @@ extends Node
 
 class_name ClientNetwork
 
+var timestamp = 0
+var game_label = null
+
 
 func _ready():
 	get_tree().connect("connected_to_server", self, "connected_ok")

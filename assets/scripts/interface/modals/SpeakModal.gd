@@ -10,7 +10,7 @@ enum modes {speak, chat}
 var current_mode = modes.speak
 
 
-func _process(delta):
+func _process(_delta):
 	if visible:
 		if Input.is_action_just_pressed("ui_accept"):
 			if current_mode == modes.speak:
@@ -35,10 +35,10 @@ func show_speak_modal(title):
 	window_title = title
 	show_modal()
 	input.grab_focus()
-	G.player.mayMove = false
+	G.player.may_move = false
 
 
 func _on_SpeakModal_hide():
 	input.text = ""
-	G.player.mayMove = true
+	G.player.may_move = true
 	chat.may_count_time = true
