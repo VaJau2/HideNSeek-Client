@@ -8,3 +8,4 @@ var settings = GameSettings.new()
 var network = null
 var player = null
 var currentCamera = null
+var bell = null

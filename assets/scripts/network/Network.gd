@@ -14,10 +14,10 @@ remote func force_disconnect(error = ""):
 	get_parent().current_error = error
 
 
-remote func spawn_puppet(id, position, flipX, partsData):
-	if (id == get_tree().network_peer.get_unique_id()): return
+remote func spawn_puppet(puppetData):
+	if (puppetData.id == get_tree().network_peer.get_unique_id()): return
 	var puppets_manager = get_node_or_null("/root/Main/Scene")
-	if puppets_manager: puppets_manager.spawn_puppet(id, position, flipX, partsData)
+	if puppets_manager: puppets_manager.spawn_puppet(puppetData)
 
 
 remote func despawn_puppet(id):
@@ -68,15 +68,22 @@ remote func sync_interact(player_id, object_path):
 
 remote func sync_state(player_id, new_state):
 	if (player_id == get_tree().network_peer.get_unique_id()): 
-		G.player.state = new_state
+		G.player.set_state(new_state, false)
 	else:
 		var puppets_manager = get_node_or_null("/root/Main/Scene")
 		if puppets_manager: puppets_manager.sync_state(player_id, new_state)
 
 
+remote func sync_hiding(player_id, hiding_on, animation):
+	if (player_id == get_tree().network_peer.get_unique_id()): return
+	var puppets_manager = get_node_or_null("/root/Main/Scene")
+	if puppets_manager: puppets_manager.sync_hiding(player_id, hiding_on, animation)
+
+
 remote func teleport(start_point_id):
 	var startPoints = get_node("/root/Main/Scene/startPoints")
 	startPoints.teleport_to_point(start_point_id)
+	if G.bell: G.bell.change_may_interact(false)
 
 
 remote func start_game(is_searcher):

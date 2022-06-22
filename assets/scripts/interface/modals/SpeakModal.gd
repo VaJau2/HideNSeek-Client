@@ -36,9 +36,11 @@ func show_speak_modal(title):
 	show_modal()
 	input.grab_focus()
 	G.player.may_move = false
+	G.player.set_typing_in_chat(true)
 
 
 func _on_SpeakModal_hide():
 	input.text = ""
 	G.player.may_move = true
 	chat.may_count_time = true
+	G.player.set_typing_in_chat(false)

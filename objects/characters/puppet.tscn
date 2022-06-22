@@ -25,7 +25,7 @@
 [ext_resource path="res://assets/audio/steps/ice/walk1.wav" type="AudioStream" id=23]
 
 [node name="puppet" instance=ExtResource( 2 )]
-collision_layer = 2147483648
+collision_layer = 2147483649
 collision_mask = 2
 script = ExtResource( 1 )
 

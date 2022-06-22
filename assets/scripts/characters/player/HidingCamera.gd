@@ -23,6 +23,8 @@ func _ready():
 
 
 func _process(_delta):
+	if G.player.is_typing_in_chat: return
+	
 	var fast = false
 	var dir = Vector2.ZERO
 	

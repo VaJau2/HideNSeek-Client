@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/scripts/characters/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/characters/base/base.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/audio/steps/ice/run1.wav" type="AudioStream" id=27]
 [ext_resource path="res://assets/scripts/characters/BodyPartsManager.gd" type="Script" id=28]
 [ext_resource path="res://assets/sprites/characters/base/eyes_back.png" type="Texture" id=29]
+[ext_resource path="res://assets/scripts/characters/player/SeekArea.gd" type="Script" id=30]
 [ext_resource path="res://assets/sprites/characters/base/eyes.png" type="Texture" id=32]
 [ext_resource path="res://assets/sprites/characters/base/open_mouth.png" type="Texture" id=33]
 [ext_resource path="res://assets/materials/themes/message_theme.tres" type="Theme" id=34]
@@ -1523,7 +1524,6 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -1681,6 +1681,10 @@ collision_layer = 3
 collision_mask = 3
 input_pickable = false
 monitorable = false
+script = ExtResource( 30 )
 
 [node name="shape" type="CollisionShape2D" parent="seekArea"]
 shape = SubResource( 10 )
+
+[connection signal="body_entered" from="seekArea" to="seekArea" method="_on_seekArea_body_entered"]
+[connection signal="body_exited" from="seekArea" to="seekArea" method="_on_seekArea_body_exited"]

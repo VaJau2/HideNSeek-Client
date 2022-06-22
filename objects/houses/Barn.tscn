@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://assets/sprites/houses/barn/barn_opened.png" type="Texture" id=1]
 [ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/houses/barn/barn_back.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/houses/barn/barn_closed.png" type="Texture" id=4]
+[ext_resource path="res://assets/scripts/furniture/interactable/HideSpot.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 92.7883, 73.1389 )
@@ -10,9 +12,15 @@ extents = Vector2( 92.7883, 73.1389 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 19.0828, 52.4641 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 39.5, 30 )
+
 [node name="Barn" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
+script = ExtResource( 5 )
+open_sprite = ExtResource( 1 )
+hide_animation = "hide2"
 
 [node name="Sprite_back" type="Sprite" parent="."]
 show_behind_parent = true
@@ -40,3 +48,14 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="hints" parent="." instance=ExtResource( 2 )]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, 5 )
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 3 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

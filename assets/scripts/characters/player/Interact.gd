@@ -9,7 +9,7 @@ var hideLabels = false
 
 
 func _process(_delta):
-	if tempInteractObj && !G.player.is_waiting():
+	if tempInteractObj && !G.player.is_waiting() && !G.player.is_typing_in_chat:
 		show_labels()
 		if Input.is_action_just_pressed(USE_ACTION):
 			var player_id = get_tree().network_peer.get_unique_id()

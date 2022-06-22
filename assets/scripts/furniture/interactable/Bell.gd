@@ -8,17 +8,20 @@ var is_ringing = false
 var ring_timer = 0
 
 
+func _ready():
+	G.bell = self
+
+
 func interact(character):
 	if !is_ringing:
+		character.change_animation("boop")
 		anim.play("ring")
 		audi.play()
 		is_ringing = true
 		ring_timer = RING_TIME
-		change_may_interact(false)
 		if character == G.player:
 			var player_id = get_tree().network_peer.get_unique_id()
 			G.network.rpc_id(1, "start_game", player_id)
-			
 
 
 func _process(delta):

@@ -17,7 +17,6 @@ func load_main_menu():
 func set_player_name() -> bool:
 	var player_name = input.text
 	if player_name.empty():
-		input.text = "Пожалуйста, введите нормальное имя"
 		return false
 	G.settings.set("player_name", player_name)
 	G.settings.set("gender", "female")

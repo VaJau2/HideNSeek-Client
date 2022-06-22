@@ -1,15 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://assets/scripts/furniture/interactable/HideSpot.gd" type="Script" id=1]
 [ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/furniture/box/box_open.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/furniture/box/box_back.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/furniture/box/box.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.234, 19.0454 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 33, 27 )
+
 [node name="Box" type="StaticBody2D"]
 collision_layer = 2147483651
 collision_mask = 3
+script = ExtResource( 1 )
+open_sprite = ExtResource( 3 )
+hide_animation = "hide2"
 
 [node name="Sprite_back" type="Sprite" parent="."]
 show_behind_parent = true
@@ -32,3 +40,11 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="hints" parent="." instance=ExtResource( 2 )]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
