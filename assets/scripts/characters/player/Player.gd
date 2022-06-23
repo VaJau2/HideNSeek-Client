@@ -1,6 +1,7 @@
 extends Character
 
-const SYNC_POSITION_TIME = 1
+const SYNC_POSITION_TIME = 0.5
+const SYNC_MOVEMENT_TIME = 0.01
 
 onready var black_screen = get_node("/root/Main/Scene/canvas/background")
 onready var camera_block = get_node("/root/Main/Scene/cameraBlock")
@@ -9,6 +10,7 @@ onready var main_camera = get_node("camera")
 onready var interact_node = get_node("interact")
 var may_move = true
 var sync_position_timer = SYNC_POSITION_TIME
+var sync_movement_timer = SYNC_MOVEMENT_TIME
 var sync_stop_onetime = false
 
 
@@ -48,7 +50,7 @@ func set_hide(hide_on: bool, animation: String) -> void:
 	.set_hide(hide_on, animation)
 	
 	var player_id = get_tree().network_peer.get_unique_id()
-	G.network.rpc_id(1, "sync_hiding", player_id, hide_on, animation)
+	G.network.rpc_id(1, "sync_hiding", hide_on, animation)
 	
 	may_move = !is_hiding
 	if is_hiding:
@@ -65,7 +67,7 @@ func set_hide(hide_on: bool, animation: String) -> void:
 func show_message(message):
 	.show_message(message)
 	var player_id = get_tree().network_peer.get_unique_id()
-	G.network.rpc_id(1, "say_message", player_id, message)
+	G.network.rpc_id(1, "say_message", message)
 
 
 func sync_movement():
@@ -74,26 +76,12 @@ func sync_movement():
 	if is_stopped && sync_stop_onetime:
 		return
 	
-	var data = {
-		"player_id": get_tree().network_peer.get_unique_id(),
-		"dir": dir,
-		"flip_x": flipX,
-		"is_running": is_running,
-		"timestamp": OS.get_ticks_msec()
-	}
-	G.network.rpc_unreliable_id(1, "sync_player_movement", data)
+	G.network.rpc_unreliable_id(1, "sync_player_movement", dir, is_running, OS.get_ticks_msec())
 	sync_stop_onetime = is_stopped
 
 
 func sync_position():
-	var data = {
-		"player_id": get_tree().network_peer.get_unique_id(),
-		"position": position,
-		"flip_x": flipX,
-		"timestamp": OS.get_ticks_msec()
-	}
-	
-	G.network.rpc_unreliable_id(1, "sync_player_position", data)
+	G.network.rpc_unreliable_id(1, "sync_player_position", position, OS.get_ticks_msec())
 
 
 func change_collision(on: bool) -> void:
@@ -148,5 +136,11 @@ func _process(delta):
 	
 	update_keys()
 	update_velocity(delta)
-	sync_movement()
+	
+	if sync_movement_timer > 0:
+		sync_movement_timer -= delta
+	else:
+		sync_movement_timer = SYNC_MOVEMENT_TIME
+		sync_movement()
+		
 	._process(delta)

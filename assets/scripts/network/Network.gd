@@ -26,20 +26,20 @@ remote func despawn_puppet(id):
 	if puppets_manager: puppets_manager.despawn_puppet(id)
 
 
-remote func sync_puppet_movement(data):
-	if (data.player_id == get_tree().network_peer.get_unique_id()): return
-	if data.timestamp > self.timestamp:
-		self.timestamp = data.timestamp
+remote func sync_puppet_movement(player_id, dir, is_running, timestamp):
+	if (player_id == get_tree().network_peer.get_unique_id()): return
+	if timestamp > self.timestamp:
+		self.timestamp = timestamp
 		var puppets_manager = get_node_or_null("/root/Main/Scene")
-		if puppets_manager: puppets_manager.sync_puppet_movement(data)
+		if puppets_manager: puppets_manager.sync_puppet_movement(player_id, dir, is_running)
 
 
-remote func sync_puppet_position(data):
-	if (data.player_id == get_tree().network_peer.get_unique_id()): return
-	if data.timestamp > self.timestamp:
-		self.timestamp = data.timestamp
+remote func sync_puppet_position(player_id, position, timestamp):
+	if (player_id == get_tree().network_peer.get_unique_id()): return
+	if timestamp > self.timestamp:
+		self.timestamp = timestamp
 		var puppets_manager = get_node_or_null("/root/Main/Scene")
-		if puppets_manager: puppets_manager.sync_puppet_position(data)
+		if puppets_manager: puppets_manager.sync_puppet_position(player_id, position)
 
 
 remote func say_message(player_id, message):

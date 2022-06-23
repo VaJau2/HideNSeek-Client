@@ -49,14 +49,14 @@ func despawn_puppet(id):
 	if old_puppet: old_puppet.queue_free()
 
 
-func sync_puppet_movement(data):
-	var sync_puppet = get_puppet(data.player_id)
-	if sync_puppet: sync_puppet.sync_movement(data)
+func sync_puppet_movement(player_id, dir, is_running):
+	var sync_puppet = get_puppet(player_id)
+	if sync_puppet: sync_puppet.sync_movement(dir, is_running)
 
 
-func sync_puppet_position(data):
-	var sync_puppet = get_puppet(data.player_id)
-	if sync_puppet: sync_puppet.sync_position(data)
+func sync_puppet_position(player_id, position):
+	var sync_puppet = get_puppet(player_id)
+	if sync_puppet: sync_puppet.sync_position(position)
 
 
 func show_message(puppet_id, message):

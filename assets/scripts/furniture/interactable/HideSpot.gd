@@ -92,7 +92,7 @@ func interact(character):
 		G.player.interact_node.tempInteractObj = self if character.is_hiding else null
 		
 		var player_id = get_tree().network_peer.get_unique_id()
-		G.network.rpc_id(1, "save_hide_in_prop", player_id, character.is_hiding, get_path())
+		G.network.rpc_id(1, "save_hide_in_prop", character.is_hiding, get_path())
 
 
 func load_hidden_puppet(character):

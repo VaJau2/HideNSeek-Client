@@ -23,6 +23,7 @@ func get(key):
 
 
 func save_settings():
+	if settings.size() == 0: return
 	var config = ConfigFile.new()
 	for key in settings:
 		config.set_value("settings", key, settings[key])

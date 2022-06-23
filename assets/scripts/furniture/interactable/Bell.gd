@@ -20,8 +20,7 @@ func interact(character):
 		is_ringing = true
 		ring_timer = RING_TIME
 		if character == G.player:
-			var player_id = get_tree().network_peer.get_unique_id()
-			G.network.rpc_id(1, "start_game", player_id)
+			G.network.rpc_id(1, "start_game")
 
 
 func _process(delta):

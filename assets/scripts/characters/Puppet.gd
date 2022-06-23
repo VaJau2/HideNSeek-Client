@@ -33,15 +33,14 @@ func set_state(new_state, sync_state = true):
 		G.network.rpc_id(1, "sync_state", get_id(), new_state)
 
 
-func sync_position(data):
-	self.position = data.position
-	set_flip_x(data.flip_x)
+func sync_position(position):
+	self.position = position
 
 
-func sync_movement(data):
-	self.dir = data.dir
-	self.is_running = data.is_running
-	set_flip_x(data.flip_x)
+func sync_movement(dir, is_running):
+	self.dir = dir
+	self.is_running = is_running
+	if dir.x != 0: set_flip_x(dir.x < 0)
 	sync_wait_timer = SYNC_WAIT_TIME
 
 
