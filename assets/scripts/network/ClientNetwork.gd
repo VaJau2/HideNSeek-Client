@@ -4,6 +4,7 @@ class_name ClientNetwork
 
 var timestamp = 0
 var game_label = null
+var search_list = null
 
 
 func _ready():

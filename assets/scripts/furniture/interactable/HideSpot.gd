@@ -54,15 +54,16 @@ func interact(character):
 	if character.state != Character.states.hide: return
 	
 	var hide_character = !character.is_hiding
+	
+	#если в пропе кто-то уже прячется
+	if hide_character && my_character != null:
+		return
+	
 	if character == G.player:
-		G.player.interact.hideLabels = hide_character
+		G.player.interact_node.hideLabels = hide_character
 	character.set_hide_in_prop(hide_character)
 	
 	if hide_character: #если персонаж собирается спрятаться
-		if my_character != null:
-			character.set_hide(false, "idle")
-			character.set_hide_in_prop(false)
-			return
 		if character == G.player:
 			character.camera_block.global_position = global_position
 			character.hiding_camera.setCurrent(free_camera_scale)
@@ -88,7 +89,7 @@ func interact(character):
 		my_character = null
 	
 	if character == G.player:
-		G.player.interact.tempInteractObj = self if character.is_hiding else null
+		G.player.interact_node.tempInteractObj = self if character.is_hiding else null
 		
 		var player_id = get_tree().network_peer.get_unique_id()
 		G.network.rpc_id(1, "save_hide_in_prop", player_id, character.is_hiding, get_path())

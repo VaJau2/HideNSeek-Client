@@ -92,12 +92,33 @@ remote func start_game(is_searcher):
 		G.player.set_state(Character.states.wait)
 	else:
 		G.player.set_state(Character.states.hide)
+		game_label.show_hide_message = true
 
 
-remote func stop_waiting():
+remote func start_searching(hiders_names):
 	if G.player.state == Character.states.wait:
 		G.player.set_state(Character.states.search)
+		if search_list: search_list.show_list(hiders_names)
+	
+	if G.player.state == Character.states.hide:
+		game_label.show_hide_message = false
+
+
+remote func player_found(found_id):
+	if search_list: search_list.player_found(found_id)
 
 
 remote func count_timer(time):
 	if game_label: game_label.show_time(time)
+
+
+remote func game_finished(searcher_name, hiders_names, is_error):
+	G.player.set_state(Character.states.none)
+	game_label.show_game_results(searcher_name, hiders_names, is_error)
+	if G.bell: G.bell.change_may_interact(true)
+	if search_list: search_list.text = ""
+
+
+#если игрок присоединился на середине игры
+remote func make_bell_disabled():
+	if G.bell: G.bell.change_may_interact(false)

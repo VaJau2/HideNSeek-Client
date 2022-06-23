@@ -58,7 +58,14 @@ func interact(character):
 
 
 #для игрока и паппетов имеет разную реализацию
-func set_state(new_state, _sync_state = true): 
+func set_state(new_state, _sync_state = true):
+	if new_state == states.none:
+		if my_prop != null:
+			my_prop.interact(self)
+		
+		if is_hiding:
+			set_hide(false, "idle")
+	
 	state = new_state
 	match new_state:
 		states.wait:

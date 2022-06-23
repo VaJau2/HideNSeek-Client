@@ -6,35 +6,42 @@ onready var black_screen = get_node("/root/Main/Scene/canvas/background")
 onready var camera_block = get_node("/root/Main/Scene/cameraBlock")
 onready var hiding_camera = camera_block.get_node("cameraBody/camera")
 onready var main_camera = get_node("camera")
-onready var interact = get_node("interact")
+onready var interact_node = get_node("interact")
 var may_move = true
 var sync_position_timer = SYNC_POSITION_TIME
 var sync_stop_onetime = false
 
 
 func check_see_body(body):
-	interact.add_interact_object(body)
+	interact_node.add_interact_object(body)
 
 
 func lost_body(body):
-	interact.remove_interact_object(body)
+	interact_node.remove_interact_object(body)
 
 
 func set_state(new_state, sync_state = true):
-	.set_state(new_state, sync_state)
+	if state == new_state: return
 	
 	if sync_state:
 		var player_id = get_tree().network_peer.get_unique_id()
 		G.network.rpc_id(1, "sync_state", player_id, new_state)
 	
-	if new_state == states.search:
-		show_message("Я иду искать!")
-		
+	#если до этого ожидал с черным экраном
+	if state == states.wait:
 		while black_screen.setBackgroundOff():
 			yield(get_tree(), "idle_frame")
+	
+	.set_state(new_state, sync_state)
+	
+	if new_state == states.search:
+		show_message("Я иду искать!")
 		seekArea.is_working = true
 	else:
 		seekArea.is_working = false
+	
+	if new_state == states.none:
+		interact_node.clear_interact_objects()
 
 
 func set_hide(hide_on: bool, animation: String) -> void:

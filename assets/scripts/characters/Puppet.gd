@@ -26,6 +26,8 @@ func change_collision(on: bool) -> void:
 
 
 func set_state(new_state, sync_state = true):
+	if state == new_state: return
+	
 	.set_state(new_state, sync_state)
 	if sync_state:
 		G.network.rpc_id(1, "sync_state", get_id(), new_state)
