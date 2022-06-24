@@ -102,7 +102,9 @@ theme = ExtResource( 1 )
 min_value = -16.0
 max_value = 0.0
 step = 0.1
+value = -4.0
 
 [connection signal="pressed" from="back/back" to="." method="_on_back_pressed"]
 [connection signal="toggled" from="back/fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="back/sound" to="." method="_on_volume_value_changed" binds= [ 1 ]]
+[connection signal="value_changed" from="back/music" to="." method="_on_volume_value_changed" binds= [ 2 ]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://objects/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/sprites/trees/tree3.png" type="Texture" id=2]
@@ -26,6 +26,9 @@
 [ext_resource path="res://assets/scripts/characters/PuppetsManager.gd" type="Script" id=24]
 [ext_resource path="res://objects/furniture/Bell.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/scripts/StartPoints.gd" type="Script" id=26]
+[ext_resource path="res://assets/scripts/Music.gd" type="Script" id=27]
+[ext_resource path="res://assets/audio/music/idle.ogg" type="AudioStream" id=28]
+[ext_resource path="res://assets/audio/music/game.ogg" type="AudioStream" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37.5189, 10 )
@@ -726,6 +729,12 @@ position = Vector2( 599, -203 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+script = ExtResource( 27 )
+idle_music = ExtResource( 28 )
+action_music = ExtResource( 29 )
 
 [connection signal="body_entered" from="tiles/materials/dirt" to="tiles/materials/dirt" method="_on_body_entered"]
 [connection signal="body_exited" from="tiles/materials/dirt" to="tiles/materials/dirt" method="_on_body_exited"]

@@ -20,12 +20,12 @@ func _ready():
 	if G.settings.has("sound"):
 		set_volume_value(1, float(G.settings.get("sound")), soundSlider)
 	else:
-		G.settings.set("sound", 0)
+		G.settings.set("sound", soundSlider.value)
 	
 	if G.settings.has("music"):
 		set_volume_value(2, float(G.settings.get("music")), musicSlider)
 	else:
-		G.settings.set("music", 0)
+		G.settings.set("music", musicSlider.value)
 
 
 func set_volume_value(bus, value, input):

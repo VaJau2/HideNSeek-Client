@@ -29,3 +29,7 @@ func _on_character_settings_pressed():
 
 func _on_game_settings_pressed():
 	get_node("Setting").visible = true
+
+
+func _on_help_pressed():
+	get_node("Help").visible = true

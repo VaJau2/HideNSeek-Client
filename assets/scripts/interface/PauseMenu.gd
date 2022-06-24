@@ -3,6 +3,7 @@ extends Control
 
 onready var back = get_node("MenuBack")
 onready var speak_modal = get_node("SpeakModal")
+onready var settings = get_node("Setting")
 
 
 func _process(delta):
@@ -13,9 +14,11 @@ func _process(delta):
 func _on_continue_pressed():
 	back.visible = !back.visible
 	G.paused = back.visible
-	if !back.visible && speak_modal.visible:
-		speak_modal.hide()
-		get_node("Setting").visible = false
+	if !back.visible:
+		if speak_modal.visible:
+			speak_modal.hide()
+		if settings.visible:
+			settings.hide()
 
 
 func _on_exit_pressed():
@@ -24,4 +27,4 @@ func _on_exit_pressed():
 
 
 func _on_settings_pressed():
-	get_node("Setting").visible = true
+	settings.visible = true

@@ -14,6 +14,8 @@ var sync_position_timer = SYNC_POSITION_TIME
 var sync_movement_timer = SYNC_MOVEMENT_TIME
 var sync_stop_onetime = false
 
+var music = null
+
 
 func set_may_move(may: bool):
 	if block_may_move: return
@@ -50,6 +52,12 @@ func set_state(new_state, sync_state = true):
 	
 	if new_state == states.none:
 		interact_node.clear_interact_objects()
+	
+	if music:
+		if state == states.hide || state == states.search:
+			music.play_action_music()
+		if state == states.none:
+			music.play_idle_music()
 
 
 func set_hide(hide_on: bool, animation: String) -> void:
@@ -127,6 +135,8 @@ func _ready():
 	
 	var player_id = get_tree().network_peer.get_unique_id()
 	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, flipX, parts.get_data_to_server())
+	
+	music = get_node_or_null("/root/Main/Scene/music")
 
 
 func _process(delta):
