@@ -25,3 +25,7 @@ func _on_exit_pressed():
 
 func _on_character_settings_pressed():
 	levelsLoader.change_menu("res://objects/interface/CharacterMenu.tscn")
+
+
+func _on_game_settings_pressed():
+	get_node("Setting").visible = true

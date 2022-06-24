@@ -1515,7 +1515,7 @@ tracks/14/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 185.375, 87.8089 )
+extents = Vector2( 200, 95.5556 )
 
 [node name="character" type="KinematicBody2D"]
 scale = Vector2( 0.9, 0.9 )
@@ -1632,6 +1632,7 @@ name_ru = "Рог"
 [node name="audi" type="AudioStreamPlayer2D" parent="."]
 volume_db = -12.0
 max_distance = 800.0
+bus = "Audio"
 script = ExtResource( 5 )
 stepsArray = {
 "dirt": [ ExtResource( 13 ), ExtResource( 18 ), ExtResource( 14 ) ],
@@ -1684,6 +1685,7 @@ monitorable = false
 script = ExtResource( 30 )
 
 [node name="shape" type="CollisionShape2D" parent="seekArea"]
+position = Vector2( 14.4445, -2.6491e-07 )
 shape = SubResource( 10 )
 
 [connection signal="body_entered" from="seekArea" to="seekArea" method="_on_seekArea_body_entered"]

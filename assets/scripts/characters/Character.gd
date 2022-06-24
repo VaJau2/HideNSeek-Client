@@ -92,7 +92,7 @@ func set_typing_in_chat(on: bool) -> void:
 
 
 func show_message(message):
-	var messageTime = 2 + message.length() / 10
+	var messageTime = 3 + message.length() / 10
 	messageLabel.text = message
 	messageTimer = messageTime
 	messageCount = true

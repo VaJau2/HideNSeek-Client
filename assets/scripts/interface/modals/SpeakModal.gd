@@ -11,6 +11,8 @@ var current_mode = modes.speak
 
 
 func _process(_delta):
+	if G.paused: return
+	
 	if visible:
 		if Input.is_action_just_pressed("ui_accept"):
 			if current_mode == modes.speak:
@@ -35,12 +37,12 @@ func show_speak_modal(title):
 	window_title = title
 	show_modal()
 	input.grab_focus()
-	G.player.may_move = false
+	G.player.set_may_move(false)
 	G.player.set_typing_in_chat(true)
 
 
 func _on_SpeakModal_hide():
 	input.text = ""
-	G.player.may_move = true
+	G.player.set_may_move(true)
 	chat.may_count_time = true
 	G.player.set_typing_in_chat(false)

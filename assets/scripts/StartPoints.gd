@@ -14,7 +14,8 @@ func _ready():
 
 
 func teleport_to_point(point_id):
-	G.player.may_move = false
+	G.player.set_may_move(false)
+	G.player.block_may_move = true
 	
 	while background.setBackgroundOn():
 		yield(get_tree(), "idle_frame")

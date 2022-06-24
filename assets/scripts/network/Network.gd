@@ -5,13 +5,11 @@ func server_disconnected():
 	force_disconnect("Сервер внезапно выключился")
 
 
-remote func force_disconnect(error = ""):
+remote func force_disconnect(error):
 	disconnect_from_server()
 	get_parent().load_level("")
 	get_parent().change_menu("res://objects/interface/MainMenu.tscn")
-	if error == "":
-		error = "Вы были отключены от сервера"
-	get_parent().current_error = error
+	if error: get_parent().current_error = error
 
 
 remote func spawn_puppet(puppetData):
@@ -87,7 +85,8 @@ remote func teleport(start_point_id):
 
 
 remote func start_game(is_searcher):
-	G.player.may_move = true
+	G.player.block_may_move = false
+	G.player.set_may_move(true)
 	if is_searcher:
 		G.player.set_state(Character.states.wait)
 	else:

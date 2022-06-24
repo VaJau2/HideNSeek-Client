@@ -73,3 +73,4 @@ anims/ring = SubResource( 2 )
 [node name="audi" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 4 )
 max_distance = 2500.0
+bus = "Audio"

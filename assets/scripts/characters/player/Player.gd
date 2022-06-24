@@ -9,9 +9,15 @@ onready var hiding_camera = camera_block.get_node("cameraBody/camera")
 onready var main_camera = get_node("camera")
 onready var interact_node = get_node("interact")
 var may_move = true
+var block_may_move = false
 var sync_position_timer = SYNC_POSITION_TIME
 var sync_movement_timer = SYNC_MOVEMENT_TIME
 var sync_stop_onetime = false
+
+
+func set_may_move(may: bool):
+	if block_may_move: return
+	may_move = may
 
 
 func check_see_body(body):
@@ -89,6 +95,8 @@ func change_collision(on: bool) -> void:
 
 
 func update_keys():
+	if G.paused: return
+	
 	if state == states.hide:
 		if Input.is_action_just_pressed("ui_hide"):
 			var new_anim = "hide1" if !is_hiding else "idle" 
