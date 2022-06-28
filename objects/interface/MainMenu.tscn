@@ -192,7 +192,7 @@ margin_top = 24.0
 margin_right = 41.0
 margin_bottom = 45.0
 theme = ExtResource( 12 )
-text = "Настройки"
+text = "Помощь"
 
 [node name="main_label" type="Label" parent="Help/back"]
 anchor_left = 1.0

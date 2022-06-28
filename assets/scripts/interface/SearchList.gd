@@ -17,8 +17,8 @@ func update_text():
 		text += "\n" + players_list[key]
 
 
-func show_list(players_list):
-	self.players_list = players_list
+func show_list(players):
+	self.players_list = players
 	update_text()
 
 
