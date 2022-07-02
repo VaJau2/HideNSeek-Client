@@ -1,24 +1,34 @@
 extends Area2D
 
 
-var is_working = false #активируется, когда игрок переходит в состояние ищущего
+onready var parent = get_parent()
 var see_players = []
+var temp_see_players = []
 var obj_i = 0
 
 
+func check_temp_see_players():
+	if temp_see_players.size() > 0:
+		for player in temp_see_players:
+			_on_seekArea_body_entered(player)
+		temp_see_players.clear()
+
+
 func _on_seekArea_body_entered(body):
-	if !is_working: return
 	if body == G.player: return
 	if body is Character:
-		if body.state != Character.states.hide: return
-		see_players.append(body)
-		if get_parent().has_method("check_see_body"):
-			get_parent().check_see_body(body)
+		if parent.state != Character.states.search: 
+			temp_see_players.append(body)
+		else:
+			see_players.append(body)
+			if get_parent().has_method("check_see_body"):
+				get_parent().check_see_body(body)
 
 
 func _on_seekArea_body_exited(body):
-	if !is_working: return
 	if get_parent() != G.player: return
+	if temp_see_players.has(body):
+		temp_see_players.erase(body)
 	if see_players.has(body):
 		see_players.erase(body)
 		if get_parent().has_method("lost_body"):
@@ -26,7 +36,7 @@ func _on_seekArea_body_exited(body):
 
 
 func _process(_delta):
-	if !is_working: return
+	if parent.state != Character.states.search: return
 	if see_players.size() == 0: return
 	
 	if see_players[obj_i].state != Character.states.hide:

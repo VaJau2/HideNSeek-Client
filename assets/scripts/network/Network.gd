@@ -112,6 +112,8 @@ remote func count_timer(time):
 
 
 remote func game_finished(searcher_name, hiders_names, is_error):
+	G.player.block_may_move = false
+	G.player.set_may_move(true)
 	G.player.set_state(Character.states.none)
 	game_label.show_game_results(searcher_name, hiders_names, is_error)
 	if G.bell: G.bell.change_may_interact(true)

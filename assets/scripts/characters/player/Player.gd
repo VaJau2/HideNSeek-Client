@@ -45,10 +45,8 @@ func set_state(new_state, sync_state = true):
 	.set_state(new_state, sync_state)
 	
 	if new_state == states.search:
+		seekArea.check_temp_see_players()
 		show_message("Я иду искать!")
-		seekArea.is_working = true
-	else:
-		seekArea.is_working = false
 	
 	if new_state == states.none:
 		interact_node.clear_interact_objects()

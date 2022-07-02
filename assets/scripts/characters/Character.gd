@@ -74,6 +74,10 @@ func set_state(new_state, _sync_state = true):
 			change_animation("idle")
 
 
+func is_on_snow() -> bool:
+	return audi.land_material == "snow"
+
+
 func is_waiting() -> bool:
 	return state == states.wait
 
@@ -122,6 +126,13 @@ func change_animation(new_animation: String) -> void:
 	anim.current_animation = new_animation
 
 
+func set_land_material(new_material: String) -> void:
+	var checked_material = "snow"
+	if MATERIAL_ACCELS.has(new_material):
+		checked_material = new_material
+	acceleration = MATERIAL_ACCELS[checked_material]
+
+
 func update_velocity(delta: float) -> void:
 	var temp_speed = run_speed if (is_running) else speed
 	if !is_hiding && (state != states.wait):
@@ -129,7 +140,7 @@ func update_velocity(delta: float) -> void:
 	else:
 		velocity = Vector2(0, 0)
 	
-	if velocity.length() > 0:
+	if dir.length() > 0:
 		var temp_anim = "run" if (is_running) else "walk"
 		change_animation(temp_anim)
 	else:

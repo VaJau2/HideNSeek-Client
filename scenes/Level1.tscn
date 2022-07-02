@@ -294,7 +294,7 @@ collision_mask = 3
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="tiles/materials/dirt"]
-position = Vector2( 99.5, 48.5 )
+position = Vector2( 99.5, 50.5 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="tiles/materials/dirt"]
@@ -334,15 +334,11 @@ position = Vector2( 352.433, -307.687 )
 shape = SubResource( 9 )
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="tiles/materials/dirt"]
-position = Vector2( 633.396, -306.427 )
+position = Vector2( 633, -230 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="tiles/materials/dirt"]
 position = Vector2( 630.567, -498.847 )
-shape = SubResource( 11 )
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="tiles/materials/dirt"]
-position = Vector2( 635.612, -115.399 )
 shape = SubResource( 11 )
 
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="tiles/materials/dirt"]
@@ -453,6 +449,8 @@ shape = SubResource( 30 )
 [node name="shadows" type="Node2D" parent="."]
 
 [node name="props" type="Node2D" parent="."]
+
+[node name="steps" type="Node2D" parent="props"]
 
 [node name="trees" type="Node2D" parent="props" groups=["sorting"]]
 

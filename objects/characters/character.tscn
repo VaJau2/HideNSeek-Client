@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/scripts/characters/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/characters/base/base.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/scripts/characters/BodyPartsManager.gd" type="Script" id=28]
 [ext_resource path="res://assets/sprites/characters/base/eyes_back.png" type="Texture" id=29]
 [ext_resource path="res://assets/scripts/characters/player/SeekArea.gd" type="Script" id=30]
+[ext_resource path="res://assets/scripts/characters/StepsSpawner.gd" type="Script" id=31]
 [ext_resource path="res://assets/sprites/characters/base/eyes.png" type="Texture" id=32]
 [ext_resource path="res://assets/sprites/characters/base/open_mouth.png" type="Texture" id=33]
 [ext_resource path="res://assets/materials/themes/message_theme.tres" type="Theme" id=34]
@@ -1631,7 +1632,7 @@ name_ru = "Рог"
 
 [node name="audi" type="AudioStreamPlayer2D" parent="."]
 volume_db = -12.0
-max_distance = 800.0
+max_distance = 300.0
 bus = "Audio"
 script = ExtResource( 5 )
 stepsArray = {
@@ -1659,6 +1660,10 @@ anims/wait = SubResource( 9 )
 anims/walk = SubResource( 8 )
 
 [node name="hints" parent="." instance=ExtResource( 3 )]
+
+[node name="steps_spawner" type="Node2D" parent="."]
+position = Vector2( 0, -26 )
+script = ExtResource( 31 )
 
 [node name="labelNode" type="Node2D" parent="."]
 z_index = 5

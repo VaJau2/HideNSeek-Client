@@ -28,6 +28,13 @@ export var stepsRunArray = {
 	"ice": []
 }
 
+
+func set_land_material(new_material: String):
+	if new_material.empty(): return
+	land_material = new_material
+	parent.set_land_material(new_material)
+
+
 func _process(delta):
 	if parent.velocity.length() > 0:
 		if timer > 0:
