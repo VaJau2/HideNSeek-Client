@@ -1,8 +1,8 @@
-extends Sprite
+extends Sprite2D
 
-export var name_ru = ""
-export var trigger_change_path: NodePath
-export var check_part_path: NodePath
+@export var name_ru = ""
+@export var trigger_change_path: NodePath
+@export var check_part_path: NodePath
 
 var part_id = 0
 var trigger_change = null #часть, которая будет меняться сразу после этой
@@ -23,7 +23,7 @@ func set_part_id(new_id = 0, force = false):
 		var part_name = name
 		if check_part && check_part.part_id > 0:
 			part_name += "_" + check_part.name
-		var path = "res://assets/sprites/characters/" + part_name + "/" + String(new_id) + ".png"
+		var path = "res://assets/sprites/characters/" + part_name + "/" + str(new_id) + ".png"
 		if !ResourceLoader.exists(path): return
 		texture = load(path)
 		
@@ -32,4 +32,5 @@ func set_part_id(new_id = 0, force = false):
 
 
 func reload_part():
-	set_part_id(part_id, true)
+	set_part_id(
+part_id, true)

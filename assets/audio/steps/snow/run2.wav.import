@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/run2.wav-5d4a4d71a9742bd91710d05f8c3cac02.sample"
+type="AudioStreamWAV"
+uid="uid://ccwdw0fg6df4w"
+path="res://.godot/imported/run2.wav-5d4a4d71a9742bd91710d05f8c3cac02.sample"
 
 [deps]
 
 source_file="res://assets/audio/steps/snow/run2.wav"
-dest_files=[ "res://.import/run2.wav-5d4a4d71a9742bd91710d05f8c3cac02.sample" ]
+dest_files=["res://.godot/imported/run2.wav-5d4a4d71a9742bd91710d05f8c3cac02.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

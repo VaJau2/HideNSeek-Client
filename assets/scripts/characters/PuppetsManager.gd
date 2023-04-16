@@ -6,17 +6,17 @@ extends Node2D
 
 var puppet_prefab = preload("res://objects/characters/puppet.tscn")
 
-onready var puppets_parent = get_node("npc")
+@onready var puppets_parent = get_node("npc")
 var hidden_puppets = {}
 
 
 func _ready():
-	var player_id = get_tree().network_peer.get_unique_id()
+	var player_id = multiplayer.get_unique_id()
 	G.network.rpc_id(1, "get_puppets", player_id)
 
 
 func get_puppet_name(id) -> String: 
-	return "puppet_" + String(id)
+	return "puppet_" + str(id)
 
 
 func get_puppet(id):
@@ -29,7 +29,7 @@ func get_puppet(id):
 
 func spawn_puppet(puppetData):
 	if get_puppet(puppetData.id) != null: return
-	var new_puppet = puppet_prefab.instance()
+	var new_puppet = puppet_prefab.instantiate()
 	new_puppet.name = get_puppet_name(puppetData.id)
 	new_puppet.gender = puppetData.gender
 	puppets_parent.add_child(new_puppet)
@@ -54,9 +54,9 @@ func sync_puppet_movement(player_id, dir, is_running):
 	if sync_puppet: sync_puppet.sync_movement(dir, is_running)
 
 
-func sync_puppet_position(player_id, position):
+func sync_puppet_position(player_id, new_position):
 	var sync_puppet = get_puppet(player_id)
-	if sync_puppet: sync_puppet.sync_position(position)
+	if sync_puppet: sync_puppet.sync_position(new_position)
 
 
 func show_message(puppet_id, message):
@@ -66,7 +66,7 @@ func show_message(puppet_id, message):
 
 #игрок для другого игрока отображается как паппет, с которым он может взаимодействовать
 func check_interact_with_player(obj_path):
-	var player_puppet_name = get_puppet_name(get_tree().network_peer.get_unique_id())
+	var player_puppet_name = get_puppet_name(multiplayer.get_unique_id())
 	if str(obj_path).ends_with(player_puppet_name):
 		return G.player
 	return false

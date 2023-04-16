@@ -1,7 +1,7 @@
 extends Control
 
-onready var levelsLoader = get_node("/root/Main")
-onready var character = get_node("sprites/character") as Character
+@onready var levelsLoader = get_node("/root/Main")
+@onready var character = get_node("sprites/character") as Character
 
 
 func _ready():

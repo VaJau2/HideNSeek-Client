@@ -2,8 +2,8 @@ extends Interactable
 
 const RING_TIME = 1
 
-onready var anim = get_node("anim")
-onready var audi = get_node("audi")
+@onready var anim = get_node("anim")
+@onready var audi = get_node("audi")
 var is_ringing = false
 var ring_timer = 0
 

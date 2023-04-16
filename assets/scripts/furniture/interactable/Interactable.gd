@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Interactable
 
-export var may_interact = true
+@export var may_interact = true
 
 
 func interact(_character):

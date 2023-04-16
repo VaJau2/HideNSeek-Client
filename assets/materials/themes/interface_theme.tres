@@ -1,19 +1,16 @@
-[gd_resource type="Theme" load_steps=4 format=2]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b5t337112nd04"]
 
-[ext_resource path="res://assets/materials/fonts/pixel_font.tres" type="DynamicFontData" id=1]
+[ext_resource type="FontFile" uid="uid://rquacyp27eyt" path="res://assets/materials/fonts/pixel_font.tres" id="1"]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.027451, 0.027451, 0.027451, 1 )
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0.027451, 0.027451, 0.027451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 expand_margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=1]
-size = 13
-font_data = ExtResource( 1 )
-
 [resource]
-default_font = SubResource( 1 )
-RichTextLabel/styles/normal = SubResource( 2 )
+default_font = ExtResource("1")
+default_font_size = 15
+RichTextLabel/styles/normal = SubResource("2")

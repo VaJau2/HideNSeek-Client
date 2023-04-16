@@ -11,16 +11,17 @@ var temp_size: Vector2
 
 
 func _ready():
-	get_node("/root").connect("size_changed", self, "resize")
+	pass
+	#get_node("/root").connect("size_changed", Callable(self, "resize"))
 
 
 func resize():
-	if G.settings.get("fullscreen"):
+	if G.settings.get_value("fullscreen"):
 		return
-	var currentSize = OS.get_window_size()
+	var currentSize = get_window().get_size()
 	var sizeScale = currentSize.x / currentSize.y
 	if sizeScale > MIN_SIZE_SCALE && sizeScale < MAX_SIZE_SCALE:
 		temp_size = currentSize
 	else:
-		OS.window_size = temp_size
+		get_window().size = temp_size
 

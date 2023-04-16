@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 #-----
 # Базовый скрипт для игрока и неписей
@@ -10,7 +10,7 @@ const SEARCH_WAIT_TIME = 0.9
 
 const MATERIAL_ACCELS = {
 	"snow": 1000,
-	"ice": 400
+	"ice": 300
 }
 
 const SPEAK_NOT_ANIMATE_CHARS = ["*", "{", "[", "("]
@@ -27,18 +27,18 @@ var my_prop = null
 var idle_onetime = false
 
 #переменные для перемещения
-onready var audi = get_node("audi")
-onready var anim = get_node("anim")
-onready var parts = get_node("sprites")
-var velocity = Vector2()
+@onready var audi = get_node("audi")
+@onready var anim = get_node("anim")
+@onready var parts = get_node("sprites")
 var dir = Vector2()
 var flipX = false
 var speed = 120
 var run_speed = 200
 var acceleration = 800
 
-onready var seekArea = get_node("seekArea")
-onready var messageLabel = get_node("labelNode/message")
+@onready var shadow = get_node("ponyShadow")
+@onready var seekArea = get_node("seekArea")
+@onready var messageLabel = get_node("labelNode/message")
 var messageTimer = 0
 var messageCount = false
 
@@ -48,7 +48,7 @@ var found_messages = {
 }
 
 #метод вызывается, когда с персонажем взаимодействует другой персонаж
-func interact(character):
+func interact(character) -> void:
 	if state == states.hide:
 		var found_message = found_messages[character.gender]
 		character.show_message(found_message)
@@ -58,7 +58,7 @@ func interact(character):
 
 
 #для игрока и паппетов имеет разную реализацию
-func set_state(new_state, _sync_state = true):
+func set_state(new_state, _sync_state = true) -> void:
 	if new_state == states.none:
 		if my_prop != null:
 			my_prop.interact(self)
@@ -89,13 +89,14 @@ func set_hide(hide_on: bool, animation: String) -> void:
 
 func set_hide_in_prop(hide_on: bool) -> void:
 	hiding_in_prop = hide_on
+	shadow.visible = !hide_on
 
 
 func set_typing_in_chat(on: bool) -> void:
 	is_typing_in_chat = on
 
 
-func show_message(message):
+func show_message(message) -> void:
 	var messageTime = 3 + message.length() / 10
 	messageLabel.text = message
 	messageTimer = messageTime
@@ -134,8 +135,9 @@ func set_land_material(new_material: String) -> void:
 
 
 func update_velocity(delta: float) -> void:
-	var temp_speed = run_speed if (is_running) else speed
-	if !is_hiding && (state != states.wait):
+	if is_hiding: return
+	if state != states.wait:
+		var temp_speed = run_speed if (is_running) else speed
 		velocity = velocity.move_toward(dir * temp_speed, acceleration * delta)
 	else:
 		velocity = Vector2(0, 0)
@@ -154,7 +156,7 @@ func set_flip_x(flipOn: bool) -> void:
 	flipX = flipOn
 
 
-func _process(delta):
+func _process(delta) -> void:
 	if messageCount:
 		if messageTimer > 0:
 			messageTimer -= delta
@@ -166,6 +168,6 @@ func _process(delta):
 		change_animation("idle")
 
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	if (velocity.length() > 0):
-		velocity = move_and_slide(velocity)
+		move_and_slide()

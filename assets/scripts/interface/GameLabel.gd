@@ -12,7 +12,7 @@ func show_game_results(searcher_name, hiders_list, is_error):
 		text = "Игрок " + searcher_name + " проиграл, не были найдены:"
 		for hider_name in hiders_list:
 			text += "\n" + hider_name
-	yield(get_tree().create_timer(2), "timeout")
+	await get_tree().create_timer(2).timeout
 	text = ""
 
 

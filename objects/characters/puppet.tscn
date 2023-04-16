@@ -1,44 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b4l71ks7eh8tv"]
 
-[ext_resource path="res://assets/scripts/characters/Puppet.gd" type="Script" id=1]
-[ext_resource path="res://objects/characters/character.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/audio/steps/wood/walk3.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/audio/steps/snow/walk2.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/audio/steps/wood/walk2.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/audio/steps/snow/walk3.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/audio/steps/wood/walk1.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/audio/steps/snow/walk1.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/audio/steps/dirt/walk1.wav" type="AudioStream" id=9]
-[ext_resource path="res://assets/audio/steps/dirt/walk3.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/audio/steps/dirt/run2.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/audio/steps/ice/run1.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/audio/steps/dirt/walk2.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/audio/steps/ice/walk2.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/audio/steps/ice/run2.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/audio/steps/ice/run3.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/audio/steps/snow/run1.wav" type="AudioStream" id=17]
-[ext_resource path="res://assets/audio/steps/ice/walk3.wav" type="AudioStream" id=18]
-[ext_resource path="res://assets/audio/steps/snow/run3.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/audio/steps/dirt/run3.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/audio/steps/snow/run2.wav" type="AudioStream" id=21]
-[ext_resource path="res://assets/audio/steps/dirt/run1.wav" type="AudioStream" id=22]
-[ext_resource path="res://assets/audio/steps/ice/walk1.wav" type="AudioStream" id=23]
+[ext_resource type="Script" path="res://assets/scripts/characters/Puppet.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://brs4thnodvu8e" path="res://objects/characters/character.tscn" id="2"]
 
-[node name="puppet" instance=ExtResource( 2 )]
-collision_layer = 2147483649
+[node name="puppet" instance=ExtResource("2")]
+collision_layer = 2147483652
 collision_mask = 2
-script = ExtResource( 1 )
-
-[node name="audi" parent="." index="3"]
-stepsArray = {
-"dirt": [ ExtResource( 9 ), ExtResource( 13 ), ExtResource( 10 ) ],
-"ice": [ ExtResource( 23 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"snow": [ ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ) ],
-"wood": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ]
-}
-stepsRunArray = {
-"dirt": [ ExtResource( 22 ), ExtResource( 11 ), ExtResource( 20 ) ],
-"ice": [ ExtResource( 12 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"snow": [ ExtResource( 17 ), ExtResource( 21 ), ExtResource( 19 ) ],
-"wood": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ]
-}
+script = ExtResource("1")

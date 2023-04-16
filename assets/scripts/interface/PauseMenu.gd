@@ -1,12 +1,12 @@
 extends Control
 
 
-onready var back = get_node("MenuBack")
-onready var speak_modal = get_node("SpeakModal")
-onready var settings = get_node("Setting")
+@onready var back = get_node("MenuBack")
+@onready var speak_modal = get_node("SpeakModal")
+@onready var settings = get_node("Setting")
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		_on_continue_pressed()
 

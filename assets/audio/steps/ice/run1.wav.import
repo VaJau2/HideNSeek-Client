@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/run1.wav-2677891b4b6c1f36afb3a09b80437b4f.sample"
+type="AudioStreamWAV"
+uid="uid://cr3x3h3tcxma2"
+path="res://.godot/imported/run1.wav-2677891b4b6c1f36afb3a09b80437b4f.sample"
 
 [deps]
 
 source_file="res://assets/audio/steps/ice/run1.wav"
-dest_files=[ "res://.import/run1.wav-2677891b4b6c1f36afb3a09b80437b4f.sample" ]
+dest_files=["res://.godot/imported/run1.wav-2677891b4b6c1f36afb3a09b80437b4f.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

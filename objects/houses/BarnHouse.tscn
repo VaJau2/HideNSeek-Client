@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkqe3whwtulko"]
+
+[ext_resource type="Texture2D" uid="uid://dwynux785k6ew" path="res://assets/sprites/houses/barn/barn_closed.png" id="1_cx0uc"]
+[ext_resource type="Script" path="res://assets/scripts/furniture/OpacityArea.gd" id="2_y60ee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqc8"]
+size = Vector2(157, 145)
+
+[node name="BarnHouse" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -56.73)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_cx0uc")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(-0.500278, -19.5001)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_yvqc8")
+
+[node name="opacityArea" type="Area2D" parent="."]
+position = Vector2(0.595, -90)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("2_y60ee")
+
+[node name="shape" type="CollisionPolygon2D" parent="opacityArea"]
+position = Vector2(-1.595, -51)
+polygon = PackedVector2Array(-76, 43, -76, 37, -5, -34, 8, -34, 78, 38, 78, 43)
+
+[connection signal="body_entered" from="opacityArea" to="opacityArea" method="_on_opacityArea_body_entered"]
+[connection signal="body_exited" from="opacityArea" to="opacityArea" method="_on_opacityArea_body_exited"]

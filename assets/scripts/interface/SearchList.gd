@@ -23,10 +23,10 @@ func show_list(players):
 
 
 func player_found(found_id):
-	var player_id = get_tree().network_peer.get_unique_id()
+	var player_id = multiplayer.get_unique_id()
 	if found_id == player_id:
 		text = "Вас успешно нашли!"
-		yield(get_tree().create_timer(1.5), "timeout")
+		await get_tree().create_timer(1.5).timeout
 		text = ""
 	
 	if G.player.state == Character.states.search:

@@ -1,20 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cm8m2be0m3t16"]
 
-[ext_resource path="res://assets/sprites/furniture/bench1.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://duofubljykgx8" path="res://assets/sprites/furniture/bench1.png" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11.3373, 25.4862 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(21, 53)
 
 [node name="bench" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -7.719 )
-scale = Vector2( 1.2, 1.2 )
-texture = ExtResource( 1 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7.719)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( -0.882065, 0.826187 )
+position = Vector2(-0.499997, 1.5)
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource("1")

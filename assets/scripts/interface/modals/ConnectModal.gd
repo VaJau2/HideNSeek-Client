@@ -1,17 +1,17 @@
 extends ColorRect
 
-onready var network = get_node("/root/Main/Network")
+@onready var network = get_node("/root/Main/Network")
 
 
 func _ready():
-	get_tree().connect("connected_to_server", self, "connected_ok")
-	get_tree().connect("connection_failed", self, "connected_fail")
+	multiplayer.connected_to_server.connect(self.connected_ok)
+	multiplayer.connection_failed.connect(self.connected_fail)
 	
 	if G.settings.has("server_port"):
-		$block/port.text = G.settings.get("server_port")
+		$block/port.text = G.settings.get_value("server_port")
 	
 	if G.settings.has("server_ip"):
-		$block/ip.text = G.settings.get("server_ip")
+		$block/ip.text = G.settings.get_value("server_ip")
 
 
 func show_connect_modal():
@@ -36,12 +36,12 @@ func show_connecting_message(on = true):
 func _on_connect_pressed():
 	var ip = $block/ip.text
 	var port = $block/port.text
-	if (ip.empty() || port.empty()):
+	if (ip.is_empty() || port.is_empty()):
 		return
 	
 	show_connecting_message()
-	G.settings.set("server_ip", ip)
-	G.settings.set("server_port", port)
+	G.settings.set_value("server_ip", ip)
+	G.settings.set_value("server_port", port)
 	network.connect_to_server(ip, port)
 
 

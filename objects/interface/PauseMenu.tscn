@@ -1,144 +1,159 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://pipt8808utic"]
 
-[ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/scripts/interface/modals/SpeakModal.gd" type="Script" id=2]
-[ext_resource path="res://assets/materials/themes/chat_theme.tres" type="Theme" id=3]
-[ext_resource path="res://assets/scripts/interface/Chat.gd" type="Script" id=4]
-[ext_resource path="res://assets/materials/themes/bix_text_theme.tres" type="Theme" id=5]
-[ext_resource path="res://assets/scripts/interface/GameLabel.gd" type="Script" id=6]
-[ext_resource path="res://assets/scripts/interface/SearchList.gd" type="Script" id=7]
-[ext_resource path="res://assets/scripts/interface/PauseMenu.gd" type="Script" id=8]
-[ext_resource path="res://objects/interface/SettingsMenu.tscn" type="PackedScene" id=9]
+[ext_resource type="Theme" uid="uid://b5t337112nd04" path="res://assets/materials/themes/interface_theme.tres" id="1"]
+[ext_resource type="Script" path="res://assets/scripts/interface/modals/SpeakModal.gd" id="2"]
+[ext_resource type="Theme" uid="uid://cqo4uo1302jpp" path="res://assets/materials/themes/chat_theme.tres" id="3"]
+[ext_resource type="Script" path="res://assets/scripts/interface/Chat.gd" id="4"]
+[ext_resource type="Theme" uid="uid://dntw5360fa0ek" path="res://assets/materials/themes/bix_text_theme.tres" id="5"]
+[ext_resource type="Script" path="res://assets/scripts/interface/GameLabel.gd" id="6"]
+[ext_resource type="Script" path="res://assets/scripts/interface/SearchList.gd" id="7"]
+[ext_resource type="Script" path="res://assets/scripts/interface/PauseMenu.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://bxm40fugg81op" path="res://objects/interface/SettingsMenu.tscn" id="9"]
 
 [node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="MenuBack" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.392157 )
+color = Color(0, 0, 0, 0.392157)
 
 [node name="Label" type="Label" parent="MenuBack"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -116.0
-margin_right = 128.0
-margin_bottom = -95.0
-theme = ExtResource( 5 )
+offset_left = -128.0
+offset_top = -116.0
+offset_right = 128.0
+offset_bottom = -95.0
+theme = ExtResource("5")
 text = "Пауза"
-align = 1
+horizontal_alignment = 1
 
 [node name="continue" type="Button" parent="MenuBack"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -68.0
-margin_right = 128.0
-margin_bottom = -44.0
-theme = ExtResource( 1 )
+offset_left = -128.0
+offset_top = -68.0
+offset_right = 128.0
+offset_bottom = -44.0
+theme = ExtResource("1")
 text = "Продолжить"
 
 [node name="settings" type="Button" parent="MenuBack"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -20.0
-margin_right = 128.0
-margin_bottom = 4.0
-theme = ExtResource( 1 )
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 4.0
+theme = ExtResource("1")
 text = "Настройки игры"
 
 [node name="exit" type="Button" parent="MenuBack"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = 28.0
-margin_right = 128.0
-margin_bottom = 52.0
-theme = ExtResource( 1 )
+offset_left = -128.0
+offset_top = 28.0
+offset_right = 128.0
+offset_bottom = 52.0
+theme = ExtResource("1")
 text = "Выйти в меню"
 
-[node name="Setting" parent="." instance=ExtResource( 9 )]
+[node name="Setting" parent="." instance=ExtResource("9")]
 visible = false
-
-[node name="SpeakModal" type="WindowDialog" parent="."]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -219.0
-margin_top = -59.0
-margin_right = 219.0
-margin_bottom = 59.0
-theme = ExtResource( 1 )
-window_title = "Enter - сказать"
-script = ExtResource( 2 )
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeakModal" type="Window" parent="."]
+position = Vector2i(400, 300)
+size = Vector2i(400, 100)
+visible = false
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="LineEdit" type="LineEdit" parent="SpeakModal"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -189.0
-margin_top = -16.5
-margin_right = 189.0
-margin_bottom = 16.5
-theme = ExtResource( 1 )
+offset_left = -189.0
+offset_top = -16.5
+offset_right = 189.0
+offset_bottom = 16.5
+theme = ExtResource("1")
 max_length = 52
 
 [node name="Chat" type="Control" parent="."]
-margin_top = 20.0
-margin_right = 305.0
-margin_bottom = 240.0
-script = ExtResource( 4 )
+anchors_preset = 0
+offset_top = 20.0
+offset_right = 305.0
+offset_bottom = 240.0
+script = ExtResource("4")
 
 [node name="label" type="RichTextLabel" parent="Chat"]
 visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 13.0
-theme = ExtResource( 3 )
+offset_left = 13.0
+theme = ExtResource("3")
 bbcode_enabled = true
 scroll_following = true
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -500.0
-margin_top = 20.0
-margin_right = 500.0
-margin_bottom = 41.0
-theme = ExtResource( 5 )
-align = 1
-script = ExtResource( 6 )
+offset_left = -500.0
+offset_top = 20.0
+offset_right = 500.0
+offset_bottom = 41.0
+theme = ExtResource("5")
+horizontal_alignment = 1
+script = ExtResource("6")
 
 [node name="SearchList" type="Label" parent="."]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -242.0
-margin_top = -163.0
-margin_right = -15.0
-margin_bottom = 167.0
-theme = ExtResource( 5 )
-align = 2
-script = ExtResource( 7 )
+offset_left = -242.0
+offset_top = -163.0
+offset_right = -15.0
+offset_bottom = 167.0
+theme = ExtResource("5")
+script = ExtResource("7")
 
 [connection signal="pressed" from="MenuBack/continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="MenuBack/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MenuBack/exit" to="." method="_on_exit_pressed"]
-[connection signal="hide" from="SpeakModal" to="SpeakModal" method="_on_SpeakModal_hide"]
+[connection signal="visibility_changed" from="SpeakModal" to="SpeakModal" method="_on_visibility_changed"]

@@ -4,7 +4,7 @@ class_name GameSettings
 var settings = {}
 
 
-func _init():
+func _init() -> void:
 	load_settings()
 
 
@@ -12,17 +12,17 @@ func has(key) -> bool:
 	return settings.has(key)
 
 
-func set(key, value):
+func set_value(key, value) -> void:
 	settings[key] = value
 
 
-func get(key):
+func get_value(key):
 	if has(key):
 		return settings[key]
 	return false
 
 
-func save_settings():
+func save_settings()  -> void:
 	if settings.size() == 0: return
 	var config = ConfigFile.new()
 	for key in settings:
@@ -30,7 +30,7 @@ func save_settings():
 	config.save("res://settings.cfg")
 
 
-func load_settings():
+func load_settings()  -> void:
 	var config = ConfigFile.new()
 	var err = config.load("res://settings.cfg")
 	if err != OK:

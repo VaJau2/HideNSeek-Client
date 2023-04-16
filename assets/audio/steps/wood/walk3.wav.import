@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/walk3.wav-67a2bc8cb133a8463f898a23fe1d2801.sample"
+type="AudioStreamWAV"
+uid="uid://bud4v1eg8nt5l"
+path="res://.godot/imported/walk3.wav-67a2bc8cb133a8463f898a23fe1d2801.sample"
 
 [deps]
 
 source_file="res://assets/audio/steps/wood/walk3.wav"
-dest_files=[ "res://.import/walk3.wav-67a2bc8cb133a8463f898a23fe1d2801.sample" ]
+dest_files=["res://.godot/imported/walk3.wav-67a2bc8cb133a8463f898a23fe1d2801.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

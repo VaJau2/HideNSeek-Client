@@ -1,7 +1,7 @@
 extends Area2D
 
 
-onready var parent = get_parent()
+@onready var parent = get_parent()
 var see_players = []
 var temp_see_players = []
 var obj_i = 0

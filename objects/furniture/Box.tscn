@@ -1,50 +1,50 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bloj4ut10gdyb"]
 
-[ext_resource path="res://assets/scripts/furniture/interactable/HideSpot.gd" type="Script" id=1]
-[ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprites/furniture/box/box_open.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/furniture/box/box_back.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/furniture/box/box.png" type="Texture" id=5]
+[ext_resource type="Script" path="res://assets/scripts/furniture/interactable/HideSpot.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://q3t30837s6an" path="res://objects/interface/InteractHints.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://djkrep06e8087" path="res://assets/sprites/furniture/box/box_open.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dfqhvbyrmu6qv" path="res://assets/sprites/furniture/box/box_back.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://43hgu02372pb" path="res://assets/sprites/furniture/box/box.png" id="5"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.234, 19.0454 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(26.9999, 36.0001)
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 33, 27 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(42, 27)
 
 [node name="Box" type="StaticBody2D"]
 collision_layer = 2147483651
 collision_mask = 3
-script = ExtResource( 1 )
-open_sprite = ExtResource( 3 )
+script = ExtResource("1")
+open_sprite = ExtResource("3")
 hide_animation = "hide2"
 
-[node name="Sprite_back" type="Sprite" parent="."]
+[node name="Sprite_back" type="Sprite2D" parent="."]
 show_behind_parent = true
-position = Vector2( 0, -18 )
-scale = Vector2( 1.2, 1.2 )
-texture = ExtResource( 4 )
+position = Vector2(0, -18)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4")
 
 [node name="hidePlace" type="Node2D" parent="."]
 show_behind_parent = true
-position = Vector2( 0, -8 )
+position = Vector2(0, -4)
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -18 )
-scale = Vector2( 1.2, 1.2 )
-texture = ExtResource( 5 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4.762 )
+position = Vector2(4.76837e-07, -5.5)
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="hints" parent="." instance=ExtResource( 2 )]
+[node name="hints" parent="." instance=ExtResource("2")]
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
+shape = SubResource("5")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

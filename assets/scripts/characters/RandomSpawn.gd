@@ -11,6 +11,6 @@ func _ready():
 	var randI = randi() % get_children().size()
 	var point = randomPoints[randI]
 	
-	var player = player_prefab.instance()
+	var player = player_prefab.instantiate()
 	get_node("../npc").call_deferred("add_child", player)
 	player.position = point.position

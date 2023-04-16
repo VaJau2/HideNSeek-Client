@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
-export var idle_music: AudioStream
-export var action_music: AudioStream
+@export var idle_music: AudioStream
+@export var action_music: AudioStream
 
 
 func _ready():

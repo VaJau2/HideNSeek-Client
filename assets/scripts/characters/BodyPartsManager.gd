@@ -14,12 +14,11 @@ var openMouthTimer = 0
 #названия спрайтов должны соответствовать папкам
 func load_variants() -> void:
 	var parts = get_children()
-	var dir = Directory.new()
 	for part in parts:
 		if !part.is_in_group("body_part"): continue
 		
 		var path = "res://assets/sprites/characters/" + part.name
-		if dir.open(path) != OK: continue
+		var dir = DirAccess.open(path)
 		variants[part.name] = { 0: "" }
 		
 		dir.list_dir_begin()
@@ -34,14 +33,14 @@ func load_variants() -> void:
 
 
 func randomize_variants() -> void:
-	if variants.empty(): load_variants()
+	if variants.is_empty(): load_variants()
 	randomize()
 
 	var body_color = _get_random_color()
 	var hair_color = _get_random_color()
 	var outfut_color = _get_random_color()
 	var outfut2_color = outfut_color
-	if (rand_range(0, 1) > 0.5):
+	if (randf_range(0, 1) > 0.5):
 		outfut2_color = _get_random_color()
 	
 	$Base.modulate = body_color
@@ -64,54 +63,51 @@ func randomize_variants() -> void:
 
 
 func _get_random_color() -> Color:
-	return Color(rand_range(0, 1), rand_range(0, 1), rand_range(0, 1))
+	return Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1))
 
 
 func save_to_settings() -> void:
-	G.settings.set("body_color", $Base.modulate.to_html())
-	G.settings.set("eyes_color", $Eyes.modulate.to_html())
+	G.settings.set_value("body_color", $Base.modulate.to_html())
+	G.settings.set_value("eyes_color", $Eyes.modulate.to_html())
 	var parts = get_children()
 	for part in parts:
 		if !part.is_in_group("body_part"): continue
 		var key = "part_" + part.name
-		G.settings.set(key + "_color", part.modulate.to_html())
-		G.settings.set(key + "_id", part.part_id)
+		G.settings.set_value(key + "_color", part.modulate.to_html())
+		G.settings.set_value(key + "_id", part.part_id)
 
 
 func load_from_settings() -> void:
-	var body_color = G.settings.get("body_color")
-	if !body_color: return
-	$Base.modulate = Color(body_color)
+	if !G.settings.has("body_color"): return
+	$Base.modulate = Color(G.settings.get_value("body_color"))
 	
-	var eyes_color = G.settings.get("eyes_color")
-	if !eyes_color: return
-	$Eyes.modulate = Color(eyes_color)
+	if !G.settings.has("eyes_color"): return
+	$Eyes.modulate = Color(G.settings.get_value("eyes_color"))
 	
 	var parts = get_children()
 	for part in parts:
 		if !part.is_in_group("body_part"): continue
 		
 		var key = "part_" + part.name
-		var part_color = G.settings.get(key + "_color")
-		if !part_color: return
-		part.modulate = Color(part_color)
+		if !G.settings.has(key + "_color"): return
+		part.modulate = Color(G.settings.get_value(key + "_color"))
 		
-		var part_id = int(G.settings.get(key + "_id"))
-		if part_id <= 0: continue
+		if !G.settings.has(key + "_id"): return
+		var part_id = int(G.settings.get_value(key + "_id"))
 		part.set_part_id(part_id)
 
 
 func get_data_to_server() -> Dictionary:
 	var data = {}
-	data.body_color = G.settings.get("body_color")
-	data.eyes_color = G.settings.get("eyes_color")
+	data.body_color = G.settings.get_value("body_color")
+	data.eyes_color = G.settings.get_value("eyes_color")
 	
 	var parts = get_children()
 	for part in parts:
 		if !part.is_in_group("body_part"): continue
 		var key = "part_" + part.name
-		data[key + "_id"] = int(G.settings.get(key + "_id"))
-		data[key + "_color"] = G.settings.get(key + "_color")
+		data[key + "_id"] = int(G.settings.get_value(key + "_id"))
+		data[key + "_color"] = G.settings.get_value(key + "_color")
 	
 	return data
 

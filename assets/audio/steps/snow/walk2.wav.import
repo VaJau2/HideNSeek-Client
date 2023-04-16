@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/walk2.wav-ab5a4a7f09d335c5042ef196e5913cae.sample"
+type="AudioStreamWAV"
+uid="uid://dicu6fyv7dkvi"
+path="res://.godot/imported/walk2.wav-ab5a4a7f09d335c5042ef196e5913cae.sample"
 
 [deps]
 
 source_file="res://assets/audio/steps/snow/walk2.wav"
-dest_files=[ "res://.import/walk2.wav-ab5a4a7f09d335c5042ef196e5913cae.sample" ]
+dest_files=["res://.godot/imported/walk2.wav-ab5a4a7f09d335c5042ef196e5913cae.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

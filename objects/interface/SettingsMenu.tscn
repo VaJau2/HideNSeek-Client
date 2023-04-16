@@ -1,104 +1,113 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bxm40fugg81op"]
 
-[ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/materials/themes/bix_text_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/scripts/interface/SettingsMenu.gd" type="Script" id=3]
+[ext_resource type="Theme" uid="uid://b5t337112nd04" path="res://assets/materials/themes/interface_theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://dntw5360fa0ek" path="res://assets/materials/themes/bix_text_theme.tres" id="2"]
+[ext_resource type="Script" path="res://assets/scripts/interface/SettingsMenu.gd" id="3"]
 
 [node name="Setting" type="ColorRect"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.392157 )
-script = ExtResource( 3 )
+color = Color(0, 0, 0, 0.392157)
+script = ExtResource("3")
 
 [node name="back" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -296.0
-margin_top = -172.0
-margin_right = 296.0
-margin_bottom = 108.0
-color = Color( 0.207843, 0.207843, 0.207843, 1 )
+offset_left = -296.0
+offset_top = -172.0
+offset_right = 296.0
+offset_bottom = 108.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="back" type="Button" parent="back"]
-margin_left = 64.0
-margin_top = 64.0
-margin_right = 192.0
-margin_bottom = 88.0
-theme = ExtResource( 1 )
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 88.0
+theme = ExtResource("1")
 text = "Назад"
 
 [node name="Label" type="Label" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -40.0
-margin_top = 24.0
-margin_right = 41.0
-margin_bottom = 45.0
-theme = ExtResource( 2 )
+offset_left = -40.0
+offset_top = 24.0
+offset_right = 41.0
+offset_bottom = 45.0
+theme = ExtResource("2")
 text = "Настройки"
 
 [node name="Label2" type="Label" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -232.0
-margin_top = 24.0
-margin_right = -80.0
-margin_bottom = 45.0
-theme = ExtResource( 1 )
+offset_left = -232.0
+offset_top = 24.0
+offset_right = -80.0
+offset_bottom = 45.0
+theme = ExtResource("1")
 text = "Громкость звуков"
 
 [node name="Label3" type="Label" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -232.0
-margin_top = 76.0
-margin_right = -80.0
-margin_bottom = 97.0
-theme = ExtResource( 1 )
+offset_left = -232.0
+offset_top = 76.0
+offset_right = -80.0
+offset_bottom = 97.0
+theme = ExtResource("1")
 text = "Громкость музыки"
 
 [node name="fullscreen" type="CheckBox" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -232.0
-margin_top = -28.0
-margin_right = 256.0
-margin_bottom = -2.0
-theme = ExtResource( 1 )
+offset_left = -232.0
+offset_top = -28.0
+offset_right = 256.0
+offset_bottom = -2.0
+theme = ExtResource("1")
 text = "Полноэкранный режим"
 
 [node name="sound" type="HSlider" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = 24.0
-margin_right = 256.0
-margin_bottom = 40.0
-theme = ExtResource( 1 )
+offset_left = -64.0
+offset_top = 24.0
+offset_right = 256.0
+offset_bottom = 40.0
+theme = ExtResource("1")
 min_value = -16.0
 max_value = 0.0
 step = 0.1
 
 [node name="music" type="HSlider" parent="back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = 80.0
-margin_right = 256.0
-margin_bottom = 96.0
-theme = ExtResource( 1 )
+offset_left = -64.0
+offset_top = 80.0
+offset_right = 256.0
+offset_bottom = 96.0
+theme = ExtResource("1")
 min_value = -16.0
 max_value = 0.0
 step = 0.1
@@ -106,5 +115,5 @@ value = -4.0
 
 [connection signal="pressed" from="back/back" to="." method="_on_back_pressed"]
 [connection signal="toggled" from="back/fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="value_changed" from="back/sound" to="." method="_on_volume_value_changed" binds= [ 1 ]]
-[connection signal="value_changed" from="back/music" to="." method="_on_volume_value_changed" binds= [ 2 ]]
+[connection signal="value_changed" from="back/sound" to="." method="_on_volume_value_changed" binds= [1]]
+[connection signal="value_changed" from="back/music" to="." method="_on_volume_value_changed" binds= [2]]

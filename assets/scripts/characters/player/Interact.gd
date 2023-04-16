@@ -12,7 +12,6 @@ func _process(_delta):
 	if tempInteractObj && !G.player.is_waiting() && !G.player.is_typing_in_chat:
 		show_labels()
 		if Input.is_action_just_pressed(USE_ACTION):
-			var player_id = get_tree().network_peer.get_unique_id()
 			G.network.rpc_id(1, "sync_interact", tempInteractObj.get_path())
 			tempInteractObj.interact(get_parent())
 	else:
@@ -29,7 +28,7 @@ func add_interact_object(newObject) -> void:
 func remove_interact_object(object) -> void:
 	if !object in interactObjectsArray: return
 	var deleteObjI = interactObjectsArray.find(object)
-	interactObjectsArray.remove(deleteObjI)
+	interactObjectsArray.remove_at(deleteObjI)
 	if interactObjectsArray.size() > 0:
 		set_temp_interactObj(0)
 	else:
@@ -45,8 +44,8 @@ func clear_interact_objects() -> void:
 
 func spawn_labels() -> void:
 	interactLabel = tempInteractObj.get_node("hints/leftLabel")
-	var actionEvents = InputMap.get_action_list(USE_ACTION)
-	interactLabel.text = OS.get_scancode_string(actionEvents[0].scancode)
+	var actionEvents = InputMap.action_get_events(USE_ACTION)
+	interactLabel.text = OS.get_keycode_string(actionEvents[0].keycode)
 
 
 func show_labels() -> void:

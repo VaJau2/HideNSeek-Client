@@ -1,7 +1,7 @@
 extends Control
 
-onready var levelsLoader = get_node("/root/Main")
-onready var input = get_node("input")
+@onready var levelsLoader = get_node("/root/Main")
+@onready var input = get_node("input")
 
 
 func _ready():
@@ -16,15 +16,15 @@ func load_main_menu():
 
 func set_player_name() -> bool:
 	var player_name = input.text
-	if player_name.empty():
+	if player_name.is_empty():
 		return false
-	G.settings.set("player_name", player_name)
-	G.settings.set("gender", "female")
+	G.settings.set_value("player_name", player_name)
+	G.settings.set_value("gender", "female")
 	return true
 
 
 func _on_input_gui_input(event):
-	if event is InputEventKey && event.pressed && event.scancode == KEY_ENTER:
+	if event is InputEventKey && event.pressed && event.keycode == KEY_ENTER:
 		if set_player_name():
 			load_main_menu()
 

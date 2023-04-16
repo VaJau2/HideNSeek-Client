@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bell_ringing.mp3-97376877bb0a8cfc5e5df86bf7888cb5.mp3str"
+uid="uid://dqm2tv4d3m7y2"
+path="res://.godot/imported/bell_ringing.mp3-97376877bb0a8cfc5e5df86bf7888cb5.mp3str"
 
 [deps]
 
 source_file="res://assets/audio/bell_ringing.mp3"
-dest_files=[ "res://.import/bell_ringing.mp3-97376877bb0a8cfc5e5df86bf7888cb5.mp3str" ]
+dest_files=["res://.godot/imported/bell_ringing.mp3-97376877bb0a8cfc5e5df86bf7888cb5.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

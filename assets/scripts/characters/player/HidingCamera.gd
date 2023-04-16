@@ -8,13 +8,14 @@ extends Camera2D
 const FAST_SPEED = 200
 const SPEED     = 120
 
-onready var body = get_parent()
+@onready var body = get_parent()
 
 
-func setCurrent(scale: float = 1):
-	body.get_parent().scale = Vector2(scale, scale)
+func setCurrent(new_scale: float = 1):
+	enabled = true
+	body.get_parent().scale = Vector2(new_scale, new_scale)
 	position = Vector2.ZERO
-	current = true
+	make_current()
 	set_process(true)
 
 
@@ -41,4 +42,5 @@ func _process(_delta):
 		fast = true
 	
 	if dir.length() > 0:
-		body.move_and_slide(dir * (FAST_SPEED if fast else SPEED))
+		body.set_velocity(dir * (FAST_SPEED if fast else SPEED))
+		body.move_and_slide()

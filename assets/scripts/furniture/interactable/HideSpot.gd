@@ -4,13 +4,13 @@ const OPEN_TIMER = 0.5
 
 var my_character = null
 
-export var open_sprite: Resource
-export var hide_animation = "hide1"
-export var free_camera_scale = 1
+@export var open_sprite: Resource
+@export var hide_animation = "hide1"
+@export var free_camera_scale = 1
 
-onready var sprite = get_node("Sprite")
-onready var hide_place = get_node("hidePlace")
-onready var npc_manager = get_node("/root/Main/Scene/npc")
+@onready var sprite = get_node("Sprite2D")
+@onready var hide_place = get_node("hidePlace")
+@onready var npc_manager = get_node("/root/Main/Scene/npc")
 var oldPlace = Vector2()
 var close_sprite
 
@@ -22,13 +22,13 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	if body is Character:
 		if body.state == Character.states.hide || body.state == Character.states.search:
-			._on_Area2D_body_entered(body)
+			super._on_Area2D_body_entered(body)
 
 
 func _on_Area2D_body_exited(body):
 	if body is Character:
 		if body.state == Character.states.hide || body.state == Character.states.search:
-			._on_Area2D_body_exited(body)
+			super._on_Area2D_body_exited(body)
 
 
 func search(searchingChar) -> void:
@@ -39,7 +39,7 @@ func search(searchingChar) -> void:
 		interact(my_character)
 	
 	may_interact = false
-	yield(get_tree().create_timer(OPEN_TIMER), "timeout")
+	await get_tree().create_timer(OPEN_TIMER).timeout
 	may_interact = true
 	sprite.texture = close_sprite
 
@@ -76,7 +76,7 @@ func interact(character):
 		oldPlace = character.global_position
 		character.global_position = hide_place.global_position
 		sprite.texture = open_sprite
-		yield(get_tree().create_timer(OPEN_TIMER), "timeout")
+		await get_tree().create_timer(OPEN_TIMER).timeout
 		sprite.texture = close_sprite
 	else: #если персонаж выходит из пропа
 		if oldPlace != Vector2.ZERO:
@@ -90,8 +90,6 @@ func interact(character):
 	
 	if character == G.player:
 		G.player.interact_node.tempInteractObj = self if character.is_hiding else null
-		
-		var player_id = get_tree().network_peer.get_unique_id()
 		G.network.rpc_id(1, "save_hide_in_prop", character.is_hiding, get_path())
 
 

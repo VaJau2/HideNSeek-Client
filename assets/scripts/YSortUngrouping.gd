@@ -1,4 +1,4 @@
-extends YSort
+extends Node2D
 
 #-----
 # Перемещает все сгруппированные объекты из группы sorting в YSort

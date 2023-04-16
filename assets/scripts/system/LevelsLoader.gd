@@ -14,7 +14,7 @@ func change_menu(menu_path: String):
 	if (ResourceLoader.exists(menu_path)):
 		if current_menu: current_menu.queue_free()
 		var menu_prefab = load(menu_path)
-		var menu = menu_prefab.instance()
+		var menu = menu_prefab.instantiate()
 		$canvas.call_deferred("add_child", menu)
 		current_menu = menu
 
@@ -28,13 +28,13 @@ func load_level(level_name: String):
 	var scene_path = "res://scenes/" + level_name + ".tscn"
 	if (ResourceLoader.exists(scene_path)):
 		var scene_prefab = load("res://scenes/" + level_name + ".tscn")
-		var scene = scene_prefab.instance()
+		var scene = scene_prefab.instantiate()
 		call_deferred("add_child", scene)
 		current_level = scene
 
 
 #сохранение настроек перед выходом из игры
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		G.settings.save_settings()
 		get_tree().quit()

@@ -1,43 +1,43 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cowa2b1lg5xsd"]
 
-[ext_resource path="res://assets/sprites/trees/tree1.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/furniture/interactable/HidingTree.gd" type="Script" id=2]
-[ext_resource path="res://objects/interface/InteractHints.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/trees/tree1_open.png" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://doimtgu1wl1dw" path="res://assets/sprites/trees/tree1.png" id="1"]
+[ext_resource type="Script" path="res://assets/scripts/furniture/interactable/HidingTree.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://q3t30837s6an" path="res://objects/interface/InteractHints.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://vrb7r3b63t0p" path="res://assets/sprites/trees/tree1_open.png" id="4"]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 6.51916
-height = 26.8507
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 5.0
+height = 36.0
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 33, 27 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(33, 27)
 
 [node name="Tree" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource( 2 )
-open_sprite = ExtResource( 4 )
-shadow_size = Vector2( 1.4, 1.3 )
+script = ExtResource("2")
+shadow_size = Vector2(1.4, 1.3)
+open_sprite = ExtResource("4")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.21022, -25.1373 )
-texture = ExtResource( 1 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.21022, -25.1373)
+texture = ExtResource("1")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="hidePlace" type="Node2D" parent="."]
 show_behind_parent = true
-position = Vector2( 0, -5 )
+position = Vector2(0, -5)
 
-[node name="hints" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -5 )
+[node name="hints" parent="." instance=ExtResource("3")]
+position = Vector2(0, -5)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
+shape = SubResource("5")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

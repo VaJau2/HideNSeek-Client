@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/idle.ogg-8bc6b9d55312a9c9229babde6dea899b.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c2yufaxqmbs6l"
+path="res://.godot/imported/idle.ogg-8bc6b9d55312a9c9229babde6dea899b.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/music/idle.ogg"
-dest_files=[ "res://.import/idle.ogg-8bc6b9d55312a9c9229babde6dea899b.oggstr" ]
+dest_files=["res://.godot/imported/idle.ogg-8bc6b9d55312a9c9229babde6dea899b.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

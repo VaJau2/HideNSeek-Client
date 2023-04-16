@@ -5,7 +5,7 @@ extends Area2D
 # Когда туда заходит игрок
 #-----
 
-onready var sprite: Sprite = get_node("../Sprite")
+@onready var sprite: Sprite2D = get_node("../Sprite2D")
 
 
 func _on_opacityArea_body_entered(body):

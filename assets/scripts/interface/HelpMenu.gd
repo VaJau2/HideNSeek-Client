@@ -1,6 +1,6 @@
 extends ColorRect
 
-onready var main_label = get_node("back/main_label")
+@onready var main_label = get_node("back/main_label")
 var temp_theme = 1
 
 
@@ -37,12 +37,12 @@ var help_text = {
 func update_theme_buttons():
 	var buttons = $back/themes.get_children()
 	for button in buttons:
-		button.pressed = int(button.name) == temp_theme
+		button.button_pressed = button.name.to_int() == temp_theme
 
 
-func _on_theme_pressed(theme):
-	main_label.text = help_text[theme]
-	temp_theme = theme
+func _on_theme_pressed(new_theme):
+	main_label.text = help_text[new_theme]
+	temp_theme = new_theme
 	update_theme_buttons()
 
 

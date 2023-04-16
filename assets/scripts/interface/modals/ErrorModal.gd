@@ -2,7 +2,7 @@ extends ColorRect
 
 
 func show_modal_error(text: String):
-	if (!text.empty()):
+	if (!text.is_empty()):
 		$block/text.text = text
 	else:
 		$block/text.text = "Неизвестная ошибка"

@@ -2,43 +2,45 @@ extends Node
 
 class_name ClientNetwork
 
+var peer = null
 var timestamp = 0
 var game_label = null
 var search_list = null
 
 
-func _ready():
-	get_tree().connect("connected_to_server", self, "connected_ok")
-	get_tree().connect("connection_failed", self, "connected_fail")
-	get_tree().connect("server_disconnected", self, "server_disconnected")
+func _ready() -> void:
+	multiplayer.connected_to_server.connect(self.connected_ok)
+	multiplayer.connection_failed.connect(self.connected_fail)
+	multiplayer.server_disconnected.connect(self.server_disconnected)
 	G.network = self
 
 
-func disconnect_from_server():
-	if (get_tree().network_peer):
-		get_tree().network_peer.close_connection()
+func disconnect_from_server() -> void:
+	if (G.network.peer):
+		G.network.peer.close()
+		multiplayer.multiplayer_peer = null
 
 
-func connect_to_server(ip, port):
+func connect_to_server(ip, port) -> void:
 	port = int(port)
-	if (ip.empty() || port <= 0):
+	if (ip.is_empty() || port <= 0):
 		return
 	
-	var peer = NetworkedMultiplayerENet.new()
+	peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip, port)
-	get_tree().network_peer = peer
+	multiplayer.multiplayer_peer = peer
 
 
-func connected_ok():
-	var player_id = get_tree().network_peer.get_unique_id()
-	var player_name = G.settings.get("player_name")
-	var character_gender = G.settings.get("gender")
+func connected_ok() -> void:
+	var player_id = peer.get_unique_id()
+	var player_name = G.settings.get_value("player_name")
+	var character_gender = G.settings.get_value("gender")
 	rpc_id(1, "add_player", player_id, player_name, character_gender)
 
 
-func connected_fail():
+func connected_fail() -> void:
 	disconnect_from_server()
 
 
-func server_disconnected():
+func server_disconnected() -> void:
 	disconnect_from_server()

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/walk2.wav-9cd38342e34548f97a0aff0ac3f44700.sample"
+type="AudioStreamWAV"
+uid="uid://cbtlxgnt274r0"
+path="res://.godot/imported/walk2.wav-9cd38342e34548f97a0aff0ac3f44700.sample"
 
 [deps]
 
 source_file="res://assets/audio/steps/wood/walk2.wav"
-dest_files=[ "res://.import/walk2.wav-9cd38342e34548f97a0aff0ac3f44700.sample" ]
+dest_files=["res://.godot/imported/walk2.wav-9cd38342e34548f97a0aff0ac3f44700.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -3,11 +3,11 @@ extends Character
 const SYNC_POSITION_TIME = 0.5
 const SYNC_MOVEMENT_TIME = 0.01
 
-onready var black_screen = get_node("/root/Main/Scene/canvas/background")
-onready var camera_block = get_node("/root/Main/Scene/cameraBlock")
-onready var hiding_camera = camera_block.get_node("cameraBody/camera")
-onready var main_camera = get_node("camera")
-onready var interact_node = get_node("interact")
+@onready var black_screen = get_node("/root/Main/Scene/canvas/background")
+@onready var camera_block = get_node("/root/Main/Scene/cameraBlock")
+@onready var hiding_camera = camera_block.get_node("cameraBody/camera")
+@onready var main_camera = get_node("camera")
+@onready var interact_node = get_node("interact")
 var may_move = true
 var block_may_move = false
 var sync_position_timer = SYNC_POSITION_TIME
@@ -34,15 +34,15 @@ func set_state(new_state, sync_state = true):
 	if state == new_state: return
 	
 	if sync_state:
-		var player_id = get_tree().network_peer.get_unique_id()
+		var player_id = G.network.peer.get_unique_id()
 		G.network.rpc_id(1, "sync_state", player_id, new_state)
 	
 	#если до этого ожидал с черным экраном
 	if state == states.wait:
 		while black_screen.setBackgroundOff():
-			yield(get_tree(), "idle_frame")
+			await get_tree().process_frame
 	
-	.set_state(new_state, sync_state)
+	super.set_state(new_state, sync_state)
 	
 	if new_state == states.search:
 		seekArea.check_temp_see_players()
@@ -59,26 +59,24 @@ func set_state(new_state, sync_state = true):
 
 
 func set_hide(hide_on: bool, animation: String) -> void:
-	.set_hide(hide_on, animation)
-	
-	var player_id = get_tree().network_peer.get_unique_id()
+	super.set_hide(hide_on, animation)
 	G.network.rpc_id(1, "sync_hiding", hide_on, animation)
 	
+	velocity = Vector2.ZERO
 	may_move = !is_hiding
+	
 	if is_hiding:
-		camera_block.global_position = main_camera.global_position
+		camera_block.global_position = global_position
 		hiding_camera.setCurrent()
-		G.currentCamera = hiding_camera
 	else:
-		main_camera.global_position = camera_block.global_position
-		main_camera.current = true
+		await get_tree().process_frame
+		main_camera.make_current()
 		hiding_camera.set_process(false)
-		G.currentCamera = main_camera
+		hiding_camera.enabled = false
 
 
 func show_message(message):
-	.show_message(message)
-	var player_id = get_tree().network_peer.get_unique_id()
+	super.show_message(message)
 	G.network.rpc_id(1, "say_message", message)
 
 
@@ -88,12 +86,12 @@ func sync_movement():
 	if is_stopped && sync_stop_onetime:
 		return
 	
-	G.network.rpc_unreliable_id(1, "sync_player_movement", dir, is_running, OS.get_ticks_msec())
+	G.network.rpc_id(1, "sync_player_movement", dir, is_running, Time.get_ticks_msec())
 	sync_stop_onetime = is_stopped
 
 
 func sync_position():
-	G.network.rpc_unreliable_id(1, "sync_player_position", position, OS.get_ticks_msec())
+	G.network.rpc_id(1, "sync_player_position", position, Time.get_ticks_msec())
 
 
 func change_collision(on: bool) -> void:
@@ -103,7 +101,7 @@ func change_collision(on: bool) -> void:
 func update_keys():
 	if G.paused: return
 	
-	if state == states.hide:
+	if state == states.hide && !hiding_in_prop:
 		if Input.is_action_just_pressed("ui_hide"):
 			var new_anim = "hide1" if !is_hiding else "idle" 
 			set_hide(!is_hiding, new_anim)
@@ -126,15 +124,14 @@ func update_keys():
 
 
 func _ready():
-	parts.load_from_settings()
 	G.player = self
-	gender = G.settings.get("gender")
-	G.currentCamera = get_node("camera")
-	
-	var player_id = get_tree().network_peer.get_unique_id()
-	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, flipX, parts.get_data_to_server())
-	
+	parts.load_from_settings()
+	gender = G.settings.get_value("gender")
 	music = get_node_or_null("/root/Main/Scene/music")
+	main_camera.make_current()
+	
+	var player_id = multiplayer.get_unique_id()
+	G.network.rpc_id(1, "spawn_player_in_map", player_id, position, flipX, parts.get_data_to_server())
 
 
 func _process(delta):
@@ -159,4 +156,4 @@ func _process(delta):
 		sync_movement_timer = SYNC_MOVEMENT_TIME
 		sync_movement()
 		
-	._process(delta)
+	super._process(delta)

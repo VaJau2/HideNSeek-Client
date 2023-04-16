@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var background = get_node("/root/Main/Scene/canvas/background")
+@onready var background = get_node("/root/Main/Scene/canvas/background")
 var searcher_point = null
 var hider_points = []
 
@@ -18,7 +18,7 @@ func teleport_to_point(point_id):
 	G.player.block_may_move = true
 	
 	while background.setBackgroundOn():
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 	
 	if point_id == -1:
 		G.player.position = searcher_point.position
@@ -28,4 +28,4 @@ func teleport_to_point(point_id):
 		G.player.set_flip_x(false)
 	
 	while background.setBackgroundOff():
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame

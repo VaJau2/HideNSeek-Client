@@ -2,17 +2,17 @@ extends Control
 
 const SHOW_CHAT_TIME = 5
 
-onready var chat = get_node("label")
+@onready var chat = get_node("label")
 var is_show = false
 var show_chat_time = 0
 
 var may_count_time = true
 
 
-func add_message(name, message):
-	if (name == null || message == null): return
-	chat.bbcode_text += "[u]{name}[/u]: {text} \n".format({
-		"name": name, 
+func add_message(player_name, message):
+	if (player_name == null || message == null): return
+	chat.text += "[u]{name}[/u]: {text} \n".format({
+		"name": player_name, 
 		"text": message
 	})
 	show_chat()
@@ -20,7 +20,7 @@ func add_message(name, message):
 
 func update_chat(new_text):
 	if (new_text == null): return
-	chat.bbcode_text = new_text
+	chat.text = new_text
 	show_chat()
 
 

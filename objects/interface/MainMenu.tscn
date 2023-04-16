@@ -1,20 +1,20 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://jbo5mudj81x5"]
 
-[ext_resource path="res://assets/sprites/trees/tree3.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox_open.png" type="Texture" id=2]
-[ext_resource path="res://objects/characters/character.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/furniture/presentBox/presentBox_back.png" type="Texture" id=5]
-[ext_resource path="res://assets/materials/themes/interface_theme.tres" type="Theme" id=6]
-[ext_resource path="res://assets/materials/themes/very_bix_text_theme.tres" type="Theme" id=7]
-[ext_resource path="res://assets/scripts/interface/MainMenu.gd" type="Script" id=8]
-[ext_resource path="res://objects/interface/ConnectModal.tscn" type="PackedScene" id=9]
-[ext_resource path="res://objects/interface/ErrorModal.tscn" type="PackedScene" id=10]
-[ext_resource path="res://objects/interface/SettingsMenu.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/materials/themes/bix_text_theme.tres" type="Theme" id=12]
-[ext_resource path="res://assets/scripts/interface/HelpMenu.gd" type="Script" id=13]
+[ext_resource type="Texture2D" uid="uid://dl3mm0ojapi6f" path="res://assets/sprites/trees/tree3.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c2pyk28axpths" path="res://assets/sprites/furniture/presentBox/presentBox_open.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://brs4thnodvu8e" path="res://objects/characters/character.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://ca7s8115agd7s" path="res://assets/sprites/furniture/presentBox/presentBox.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d4btqu1et46nv" path="res://assets/sprites/furniture/presentBox/presentBox_back.png" id="5"]
+[ext_resource type="Theme" uid="uid://b5t337112nd04" path="res://assets/materials/themes/interface_theme.tres" id="6"]
+[ext_resource type="Theme" uid="uid://cdu54lrykic4r" path="res://assets/materials/themes/very_bix_text_theme.tres" id="7"]
+[ext_resource type="Script" path="res://assets/scripts/interface/MainMenu.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://utoxcncd06r8" path="res://objects/interface/ConnectModal.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://b8k688xsbp7gs" path="res://objects/interface/ErrorModal.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://objects/interface/SettingsMenu.tscn" id="11"]
+[ext_resource type="Theme" uid="uid://dntw5360fa0ek" path="res://assets/materials/themes/bix_text_theme.tres" id="12"]
+[ext_resource type="Script" path="res://assets/scripts/interface/HelpMenu.gd" id="13"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends ColorRect
 
 var fade_speed = 2
@@ -22,7 +22,7 @@ var fade_speed = 2
 
 func _ready():
 	set_process(false)
-	yield(get_tree().create_timer(0.5), \"timeout\")
+	await get_tree().create_timer(0.5).timeout
 	set_process(true)
 
 
@@ -34,175 +34,225 @@ func _process(delta):
 "
 
 [node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8")
 
 [node name="back" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -80.0
-margin_top = 72.0
-margin_right = 72.0
-margin_bottom = 103.0
-theme = ExtResource( 7 )
+offset_left = -84.0
+offset_top = 41.0
+offset_right = 81.0
+offset_bottom = 78.0
+grow_horizontal = 2
+theme = ExtResource("7")
 text = "Hide'n Seek"
-align = 1
 
 [node name="connect" type="Button" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 128.0
-margin_top = -108.0
-margin_right = 320.0
-margin_bottom = -84.0
-theme = ExtResource( 6 )
+offset_left = 128.0
+offset_top = -108.0
+offset_right = 320.0
+offset_bottom = -84.0
+theme = ExtResource("6")
 text = "Подключиться"
 
 [node name="character_settings" type="Button" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 128.0
-margin_top = -68.0
-margin_right = 320.0
-margin_bottom = -44.0
-theme = ExtResource( 6 )
+offset_left = 128.0
+offset_top = -68.0
+offset_right = 320.0
+offset_bottom = -44.0
+theme = ExtResource("6")
 text = "Настроить персонажа"
 
 [node name="game_settings" type="Button" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 128.0
-margin_top = -28.0
-margin_right = 320.0
-margin_bottom = -4.0
-theme = ExtResource( 6 )
+offset_left = 128.0
+offset_top = -28.0
+offset_right = 320.0
+offset_bottom = -4.0
+theme = ExtResource("6")
 text = "Настройки игры"
 
 [node name="help" type="Button" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 128.0
-margin_top = 12.0
-margin_right = 320.0
-margin_bottom = 36.0
-theme = ExtResource( 6 )
+offset_left = 128.0
+offset_top = 12.0
+offset_right = 320.0
+offset_bottom = 36.0
+theme = ExtResource("6")
 text = "Помощь"
 
 [node name="exit" type="Button" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 128.0
-margin_top = 52.0
-margin_right = 320.0
-margin_bottom = 76.0
-theme = ExtResource( 6 )
+offset_left = 128.0
+offset_top = 52.0
+offset_right = 320.0
+offset_bottom = 76.0
+theme = ExtResource("6")
 text = "Выход"
 
 [node name="sprites" type="Control" parent="."]
+anchors_preset = 0
 anchor_left = 1.0
 anchor_top = 0.453
 anchor_right = 1.0
 anchor_bottom = 0.453
-margin_left = -424.0
-margin_top = 8.19998
-margin_bottom = 248.2
+offset_left = -424.0
+offset_top = 8.19998
+offset_bottom = 248.2
 
-[node name="Tree3" type="Sprite" parent="sprites"]
-position = Vector2( 206, -42.5 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+[node name="Tree3" type="Sprite2D" parent="sprites"]
+position = Vector2(206, -42.5)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1")
 
-[node name="PresentBox2" type="Sprite" parent="sprites"]
-position = Vector2( 99, 53.5 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 4 )
+[node name="PresentBox2" type="Sprite2D" parent="sprites"]
+position = Vector2(99, 53.5)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4")
 
-[node name="PresentBoxBack" type="Sprite" parent="sprites"]
-position = Vector2( 144, 120 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 5 )
+[node name="PresentBoxBack" type="Sprite2D" parent="sprites"]
+position = Vector2(144, 120)
+scale = Vector2(3, 3)
+texture = ExtResource("5")
 
-[node name="character" parent="sprites" instance=ExtResource( 3 )]
-position = Vector2( 150, 157.5 )
-scale = Vector2( -3, 3 )
+[node name="character" parent="sprites" instance=ExtResource("3")]
+position = Vector2(150, 157.5)
+scale = Vector2(-3, 3)
 
-[node name="PresentBoxOpen" type="Sprite" parent="sprites"]
-position = Vector2( 144, 120 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 2 )
+[node name="PresentBoxOpen" type="Sprite2D" parent="sprites"]
+position = Vector2(144, 120)
+scale = Vector2(3, 3)
+texture = ExtResource("2")
 
-[node name="PresentBox" type="Sprite" parent="sprites"]
-position = Vector2( 262, 149.5 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 4 )
+[node name="PresentBox" type="Sprite2D" parent="sprites"]
+position = Vector2(262, 149.5)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4")
 
-[node name="ConnectModalBack" parent="." instance=ExtResource( 9 )]
+[node name="ConnectModalBack" parent="." instance=ExtResource("9")]
 visible = false
-
-[node name="ErrorModalBack" parent="." instance=ExtResource( 10 )]
-visible = false
-
-[node name="front" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-script = SubResource( 1 )
-
-[node name="Setting" parent="." instance=ExtResource( 11 )]
-visible = false
-
-[node name="Help" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.392157 )
-script = ExtResource( 13 )
-
-[node name="back" type="ColorRect" parent="Help"]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -384.0
-margin_top = -236.0
-margin_right = 424.0
-margin_bottom = 276.0
-color = Color( 0.207843, 0.207843, 0.207843, 1 )
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErrorModalBack" parent="." instance=ExtResource("10")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="front" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+script = SubResource("1")
+
+[node name="Setting" parent="." instance=ExtResource("11")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Help" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+script = ExtResource("13")
+
+[node name="back" type="ColorRect" parent="Help"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -236.0
+offset_right = 424.0
+offset_bottom = 276.0
+color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [node name="back" type="Button" parent="Help/back"]
-margin_left = 64.0
-margin_top = 64.0
-margin_right = 216.0
-margin_bottom = 88.0
-theme = ExtResource( 6 )
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 216.0
+offset_bottom = 88.0
+theme = ExtResource("6")
 text = "Назад"
 
 [node name="Label" type="Label" parent="Help/back"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -40.0
-margin_top = 24.0
-margin_right = 41.0
-margin_bottom = 45.0
-theme = ExtResource( 12 )
+offset_left = -40.0
+offset_top = 24.0
+offset_right = 41.0
+offset_bottom = 45.0
+theme = ExtResource("12")
 text = "Помощь"
 
 [node name="main_label" type="Label" parent="Help/back"]
+layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -552.0
-margin_top = -384.0
-margin_right = -39.0
-theme = ExtResource( 6 )
+offset_left = -552.0
+offset_top = -384.0
+offset_right = -39.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("6")
 text = "Управление:
 
 WASD - передвижение
@@ -210,35 +260,30 @@ E - использовать (спрятаться в режиме пряток,
 H - пригнуться (в режиме пряток)
 T - сказать
 Y - написать в чат"
-autowrap = true
+autowrap_mode = 2
 
 [node name="themes" type="VBoxContainer" parent="Help/back"]
+layout_mode = 0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 128.0
-margin_right = 216.0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 216.0
 
 [node name="1" type="Button" parent="Help/back/themes"]
-margin_right = 152.0
-margin_bottom = 24.0
-theme = ExtResource( 6 )
+layout_mode = 2
+theme = ExtResource("6")
 toggle_mode = true
-pressed = true
 text = "Управление"
 
 [node name="2" type="Button" parent="Help/back/themes"]
-margin_top = 28.0
-margin_right = 152.0
-margin_bottom = 52.0
-theme = ExtResource( 6 )
+layout_mode = 2
+theme = ExtResource("6")
 toggle_mode = true
 text = "Подключение"
 
 [node name="3" type="Button" parent="Help/back/themes"]
-margin_top = 56.0
-margin_right = 152.0
-margin_bottom = 80.0
-theme = ExtResource( 6 )
+layout_mode = 2
+theme = ExtResource("6")
 toggle_mode = true
 text = "Правила игры"
 
@@ -248,6 +293,6 @@ text = "Правила игры"
 [connection signal="pressed" from="help" to="." method="_on_help_pressed"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Help/back/back" to="Help" method="_on_back_pressed"]
-[connection signal="pressed" from="Help/back/themes/1" to="Help" method="_on_theme_pressed" binds= [ 1 ]]
-[connection signal="pressed" from="Help/back/themes/2" to="Help" method="_on_theme_pressed" binds= [ 2 ]]
-[connection signal="pressed" from="Help/back/themes/3" to="Help" method="_on_theme_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="Help/back/themes/1" to="Help" method="_on_theme_pressed" binds= [1]]
+[connection signal="pressed" from="Help/back/themes/2" to="Help" method="_on_theme_pressed" binds= [2]]
+[connection signal="pressed" from="Help/back/themes/3" to="Help" method="_on_theme_pressed" binds= [3]]

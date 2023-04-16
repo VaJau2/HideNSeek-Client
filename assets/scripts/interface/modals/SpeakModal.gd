@@ -1,10 +1,10 @@
-extends WindowDialog
+extends Window
 
 const SPEAK_TITLE = "Enter - сказать"
 const CHAT_TITLE = "Enter - отправить в чат"
 
-onready var input = get_node("LineEdit")
-onready var chat = get_node("../Chat")
+@onready var input = get_node("LineEdit")
+@onready var chat = get_node("../Chat")
 
 enum modes {speak, chat}
 var current_mode = modes.speak
@@ -18,7 +18,7 @@ func _process(_delta):
 			if current_mode == modes.speak:
 				G.player.show_message(input.text)
 			elif current_mode == modes.chat:
-				var player_name = G.settings.get("player_name")
+				var player_name = G.settings.get_value("player_name")
 				G.network.rpc_id(1, "add_message_to_chat_from_user", player_name, input.text)
 				chat.may_count_time = true
 			visible = false
@@ -33,15 +33,16 @@ func _process(_delta):
 			chat.may_count_time = false
 
 
-func show_speak_modal(title):
-	window_title = title
-	show_modal()
+func show_speak_modal(new_title):
+	title = new_title
+	show()
 	input.grab_focus()
 	G.player.set_may_move(false)
 	G.player.set_typing_in_chat(true)
 
 
-func _on_SpeakModal_hide():
+func _on_visibility_changed():
+	if visible: return
 	input.text = ""
 	G.player.set_may_move(true)
 	chat.may_count_time = true

@@ -6,13 +6,13 @@ const GENDERS = {
 }
 
 
-onready var levelsLoader = get_node("/root/Main")
-onready var character = get_node("characterBack/character")
-onready var partsList = get_node("parts")
-onready var mainColorPicker = get_node("mainColor")
-onready var eyesColorPicker = get_node("eyesColor")
-onready var partColorPicker = get_node("parts_more/part_color")
-onready var partIdInput = get_node("parts_more/part_id")
+@onready var levelsLoader = get_node("/root/Main")
+@onready var character = get_node("characterBack/character")
+@onready var partsList = get_node("parts")
+@onready var mainColorPicker = get_node("mainColor")
+@onready var eyesColorPicker = get_node("eyesColor")
+@onready var partColorPicker = get_node("parts_more/part_color")
+@onready var partIdInput = get_node("parts_more/part_id")
 
 
 var temp_body_part = null
@@ -28,21 +28,24 @@ func _ready():
 	load_body_parts()
 	load_name()
 	load_gender()
+	_on_parts_item_selected(0)
 
 
 func load_body_parts():
 	var parts = get_tree().get_nodes_in_group("body_part")
 	for part in parts:
 		if part.get_node("../../") != character: continue
-		partsList.add_item(part.name_ru, part.get_instance_id())
+		partsList.add_item(part.name_ru)
+		var addedItemIndex = partsList.item_count - 1
+		partsList.set_item_metadata(addedItemIndex, part.get_path())
 
 
 func load_name():
-	$name.text = G.settings.get("player_name")
+	$name.text = G.settings.get_value("player_name")
 
 
 func load_gender():
-	var gender_name = G.settings.get("gender")
+	var gender_name = G.settings.get_value("gender")
 	for gender_id in GENDERS:
 		if GENDERS[gender_id] == gender_name:
 			$gender.selected = gender_id
@@ -50,29 +53,30 @@ func load_gender():
 
 
 func _on_parts_item_selected(index):
-	var itemId = partsList.get_item_id(index)
-	$parts_more.visible = itemId != 0
-	if itemId == 0:
+	var itemPath = partsList.get_item_metadata(index)
+	$parts_more.visible = itemPath != null
+	if itemPath == null:
 		temp_body_part = null
 	else:
-		temp_body_part = instance_from_id(itemId)
+		temp_body_part = get_node(itemPath)
 		ignore_type_check = true
-		partIdInput.max_value = character.parts.variants.keys().size() - 1
+		var variants = character.parts.variants[temp_body_part.name]
+		partIdInput.max_value = variants.size() - 1
 		partIdInput.value = temp_body_part.part_id
 		partColorPicker.color = temp_body_part.modulate
 		ignore_type_check = false
 
 
-func _on_mainColor_color_changed(color):
-	character.get_node("sprites/Base").modulate = color
+func _on_mainColor_color_changed(new_color):
+	character.get_node("sprites/Base").modulate = new_color
 
 
-func _on_eyesColor_color_changed(color):
-	character.get_node("sprites/Eyes").modulate = color
+func _on_eyesColor_color_changed(new_color):
+	character.get_node("sprites/Eyes").modulate = new_color
 
 
-func _on_part_color_color_changed(color):
-	temp_body_part.modulate = color
+func _on_part_color_color_changed(new_color):
+	temp_body_part.modulate = new_color
 
 
 func _on_part_id_value_changed(value):
@@ -82,11 +86,11 @@ func _on_part_id_value_changed(value):
 
 func _on_gender_item_selected(index):
 	if GENDERS.has(index):
-		G.settings.set("gender", GENDERS[index])
+		G.settings.set_value("gender", GENDERS[index])
 
 
 func _on_save_pressed():
-	G.settings.set("player_name", $name.text) 
+	G.settings.set_value("player_name", $name.text) 
 	character.parts.save_to_settings()
 	_on_back_pressed()
 

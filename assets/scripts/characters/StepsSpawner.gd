@@ -7,7 +7,7 @@ const ALLOWED_FRAMES = [
 	17, 18, 19, 20, 21, 22, 23, 32, 33
 ]
 
-onready var parent = get_parent()
+@onready var parent = get_parent()
 var steps_parent
 
 var walk_timer = 0
@@ -33,7 +33,7 @@ func spawn_step():
 			current_frame = 0
 	if !ALLOWED_FRAMES.has(current_frame): return
 	
-	var new_step = step_prefab.instance()
+	var new_step = step_prefab.instantiate()
 	steps_parent.add_child(new_step)
 	new_step.global_position = global_position
 	new_step.frame = current_frame
